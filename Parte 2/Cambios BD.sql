@@ -96,7 +96,7 @@ CREATE TABLE TipoEntidad (
 
 CREATE TABLE Bitacora (
 	id int not null identity (1, 1) primary key ,
-	IdEntityType int not null, -- referencia a table EntityType
+	IdEntityType int not null Foreign Key references TipoEntidad(Id), -- referencia a table EntityType
 	EntityId int not null, -- Id de la entidad siendo actualizada
 	jsonAntes varchar (500),
 	jsonDespues varchar (500),

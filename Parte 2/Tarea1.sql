@@ -26,11 +26,12 @@ drop Table dbo.CCFijo;
 drop Table dbo.CCPorcentaje;
 drop Table dbo.Propiedad;
 
-drop Table dbo.TipoDocId;
+
 drop Table dbo.Propietario;
 
 drop Table dbo.Usuario;
 drop Table dbo.ConceptoCobro;
+drop Table dbo.TipoDocId;
 */
 -- Borra datos
 /*     
@@ -94,7 +95,7 @@ create TABLE TipoDocId(
 
 create TABLE Propietario(
 	Id int identity(1,1) not null Primary Key,
-	ValorTipoDocId int not null,
+	ValorTipoDocId int not null Foreign Key references TipoDocId(Id),
 	Nombre varchar(100) not null,
 	Identificacion varchar(30) not null,
 	FechaCreacion date not null,
@@ -106,7 +107,7 @@ ADD FechaCreacion date not null*/
 
 create TABLE PersonaJuridica(
 	Id int not null Primary Key Foreign Key references Propietario(Id),
-	ValorTipoDocId int not null,
+	ValorTipoDocId int not null Foreign Key references TipoDocId(Id),
 	Identificacion varchar(30) not null,
 	Activo int not null
 );
