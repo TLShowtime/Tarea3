@@ -1,12 +1,13 @@
 Use [Tarea2]
 
 /**
-	DELETE TipoMovAP
-	DELETE AP
-	DELETE MovimientosAP
-	DELETE RecibosAP
-	DELETE TiposValoresConfiguracion
 	DELETE ValoresConfiguracion
+	DELETE TiposValoresConfiguracion
+	DELETE RecibosAP
+	DELETE MovimientosAP
+	DELETE AP
+	DELETE TipoMovAP
+	DELETE CCArregloPago	
 */
 /** 
 	DROP TABLE ValoresConfiguracion
@@ -15,11 +16,14 @@ Use [Tarea2]
 	DROP TABLE MovimientosAP
 	DROP TABLE AP
 	DROP TABLE TipoMovAP
-	
+	DROP TABLE CCArregloPago	
 	
 
 */
-
+CREATE TABLE CCArregloPago(
+	Id int not null Primary Ley Foreign Key references ConceptoCobrp(Id),
+	Activo int not null
+)
 
 CREATE TABLE TipoMovAP(
 	Id int not null Primary Key,

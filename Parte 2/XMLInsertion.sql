@@ -64,6 +64,15 @@ FROM (SELECT CAST(MY_XML AS xml)
 	 CROSS APPLY MY_XML.nodes('Conceptos_de_Cobro/conceptocobro') AS MY_XML (CCobro)
 WHERE CCobro.value('@TipoCC','varchar(50)') = 'CC Interes Moratorio';
 
+INSERT INTO dbo.CCArregloPago(Id,Activo)
+SELECT
+	CCobro.value('@id','int') as Id,
+	Activo = 1
+FROM (SELECT CAST(MY_XML AS xml)
+	 FROM OPENROWSET (BULK 'C:\Users\liugu\Desktop\Pruebas_2\Concepto de Cobro.xml',SINGLE_BLOB) AS T(MY_XML)) AS T(MY_XML)
+	 CROSS APPLY MY_XML.nodes('Conceptos_de_Cobro/conceptocobro') AS MY_XML (CCobro)
+WHERE CCobro.value('@TipoCC','varchar(50)') = 'Cuota Calculada';
+
 
 ------------------------------------------------------------------------------------------
 INSERT INTO dbo.Usuario(Username,Contrasenna,TipoUsuario,Activo)
