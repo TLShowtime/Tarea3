@@ -46,7 +46,7 @@ Creación de arreglos de pago (Administrador, Transaccional)
 	“recibos pendientes pagados”
 
 
-	Intereses = 20% -> Tabla de Configuraciones
+	Intereses = 10% -> Tabla de Configuraciones
 	Método frances:
 		R = P [(i (1 + i)n) / ((1 + i)n – 1)]
 	Donde:
@@ -66,9 +66,9 @@ Creación de arreglos de pago (Administrador, Transaccional)
 
 	- El AP se paga mediante recibos mensuales (cuotas de AP) que se generan todos los días basado en su día de creación respecto al mes
 
-	Cada mes se genera un movimiento que reduce el saldo del AP
+	Cada mes se genera un movimiento que reduce el saldo del AP 
 	Interés_del_mes = Saldo * tasa_de_Interés/12
-	Amortización = Cuota - Interés_del_mes
+	Amortización = Cuota - Interés_del_mes (descripcion en recibo)
 	Saldo = Saldo - Amortizacion
 
 	Saldo-> total a pagar del AP
@@ -86,3 +86,5 @@ Creación de arreglos de pago (Administrador, Transaccional)
 	<AP NumeroFinca=”123”, Plazo=”12”/>
 		- Todos los recibos pendientes, moratorios de todos los CCs a esa propiedad y ...
 		- Transaccional
+
+Cuando se crea en AP, el saldo es 0, pero junto con si creación se crea el primer movimiento, que es un débito por el monto del AP, que aumenta el saldo en ese monto, tal que después de aplicado, el saldo es igual al  monto original del AP. Este movimiento , al ser un débito, no se asocia a ningún recibo. A partir de ese momento, lo típico es que cada mes, en el día que corresponde se genera el movimiento (crédito) que amortiza el saldo y calcula intereses, el cual debe asociarse con un recibo.

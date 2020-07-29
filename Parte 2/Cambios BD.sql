@@ -9,7 +9,7 @@ add MontoMinimoRecibo money not null
 /* 
 USE [Tarea2]
 DROP TABLE CCInteresesMoratorios
- DROP TABLE TipoEntidad
+ 
  
  
  DROP TABLE Movimiento
@@ -17,6 +17,7 @@ DROP TABLE CCInteresesMoratorios
  DROP TABLE Reconexion
  DROP TABLE ReciboReconexion
  DROP TABLE Bitacora
+ DROP TABLE TipoEntidad
  DROP TABLE TipoMovimiento
  DROP TABLE Recibo
  DROP TABLE ComprobantePago

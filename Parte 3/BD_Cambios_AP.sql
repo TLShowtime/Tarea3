@@ -21,7 +21,7 @@ Use [Tarea2]
 
 */
 CREATE TABLE CCArregloPago(
-	Id int not null Primary Ley Foreign Key references ConceptoCobrp(Id),
+	Id int not null Primary Key Foreign Key references ConceptoCobro(Id),
 	Activo int not null
 )
 
@@ -72,7 +72,7 @@ CREATE TABLE TiposValoresConfiguracion(
 );
 
 CREATE TABLE ValoresConfiguracion(
-	Id int not null identity(1,1) Primary Key,
+	Id int not null Primary Key,
 	IdTipo int not null Foreign Key references TiposValoresConfiguracion(Id),
 	Nombre varchar(30) not null,
 	Valor varchar(100) not null,
@@ -80,3 +80,13 @@ CREATE TABLE ValoresConfiguracion(
 	UpdatedAt datetime not null,
 	Activo int not null
 );
+
+Insert into dbo.TiposValoresConfiguracion(Id,NombreTipo,Activo) 
+	values
+	(1,'decimal',1);
+
+Insert into dbo.ValoresConfiguracion(Id,IdTipo,Nombre,Valor,InsertedAt,UpdatedAt,Activo) values(
+	1,1,'TasaInteres AP', '10.0',CONVERT(varchar,getDate()), CONVERT(varchar,getDate()),1
+);
+
+
