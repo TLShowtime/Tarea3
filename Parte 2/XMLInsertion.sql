@@ -1,6 +1,6 @@
 USE [Tarea2]
 
-
+delete dbo.CCArregloPago
 delete dbo.CCConsumo
 delete dbo.CCFijo
 delete dbo.CCPorcentaje
