@@ -12,8 +12,8 @@ public partial class WebRecibosPagados : System.Web.UI.Page
         try
         {
             SqlDataSource1.SelectCommand = "SELECT Usuario.Username, Propiedad.NumeroFinca, Recibo.FechaEmision, Recibo.FechaVencimiento, Recibo.Monto, Recibo.Estado FROM Propiedad INNER JOIN ComprobantePago INNER JOIN Recibo ON ComprobantePago.Id = Recibo.ComprobanteId INNER JOIN ConceptoCobro ON Recibo.ConceptoCobroId = ConceptoCobro.Id ON Propiedad.Id = Recibo.PropiedadId INNER JOIN UsuarioDePropiedad INNER JOIN Usuario ON UsuarioDePropiedad.UsuarioId = Usuario.Id ON Propiedad.Id = UsuarioDePropiedad.PropiedadId WHERE (Recibo.Activo = 1) AND (Recibo.Estado = 0) AND Usuario.Username LIKE '%" + Convert.ToString(Session["UsuarioSesion"]) + "%' ORDER BY Recibo.FechaEmision";
+            lblError.Text = Convert.ToString(Session["UsuarioSesion"]);
             SqlDataSource1.DataBind();
-            listaPagados.Visible = true;
         }
         catch
         {

@@ -164,7 +164,7 @@
                                 <asp:BoundField DataField="M3AcumuladosUltimoRecibo" HeaderText="M3AcumuladosUltimoRecibo" SortExpression="M3AcumuladosUltimoRecibo" />
                             </Columns>
                         </asp:GridView>
-                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="Data Source=DESKTOP-1V17TIN;Initial Catalog=Ejemplo;Integrated Security=True" ProviderName="System.Data.SqlClient" SelectCommand="SELECT NumeroFinca, Direccion, Valor, FechaCreacion, M3Acumulados, M3AcumuladosUltimoRecibo FROM Propiedad"></asp:SqlDataSource>
+                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="Data Source=DESKTOP-COSHJ5K;Initial Catalog=Ejemplo;Integrated Security=True" ProviderName="System.Data.SqlClient" SelectCommand="SELECT [NumeroFinca], [Direccion], [Valor], [FechaCreacion], [M3Acumulados], [M3AcumuladosUltimoRecibo] FROM [Propiedad]"></asp:SqlDataSource>
                     </td>
                 </tr>
             </table>
