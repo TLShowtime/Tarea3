@@ -57,7 +57,7 @@
                                 <asp:BoundField DataField="EntityId" HeaderText="EntityId" SortExpression="EntityId" />
                             </Columns>
                         </asp:GridView>
-                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="Data Source=DESKTOP-1V17TIN;Initial Catalog=Ejemplo;Integrated Security=True" ProviderName="System.Data.SqlClient" SelectCommand="SELECT jsonAntes, jsonDespues, insertedAt, insertedby, insertedIn, IdEntityType, EntityId FROM Bitacora"></asp:SqlDataSource>
+                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="Data Source=DESKTOP-COSHJ5K;Initial Catalog=Ejemplo;Integrated Security=True" ProviderName="System.Data.SqlClient" SelectCommand="SELECT [jsonAntes], [jsonDespues], [insertedAt], [insertedby], [insertedIn], [IdEntityType], [EntityId] FROM [Bitacora]"></asp:SqlDataSource>
                     </td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>

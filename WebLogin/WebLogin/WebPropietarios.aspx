@@ -150,7 +150,7 @@
                     <asp:BoundField DataField="ValorTipoDocId" HeaderText="ValorTipoDocId" SortExpression="ValorTipoDocId" />
                 </Columns>
             </asp:GridView>
-            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="Data Source=DESKTOP-1V17TIN;Initial Catalog=Ejemplo;Integrated Security=True" ProviderName="System.Data.SqlClient" SelectCommand="SELECT Nombre, Identificacion, ValorTipoDocId FROM Propietario WHERE (Activo = 1)"></asp:SqlDataSource>
+            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="Data Source=DESKTOP-COSHJ5K;Initial Catalog=Ejemplo;Integrated Security=True" ProviderName="System.Data.SqlClient" SelectCommand="SELECT Nombre, Identificacion, ValorTipoDocId FROM Propietario WHERE (Activo = 1)"></asp:SqlDataSource>
             <br />
         </div>
     </form>

@@ -15,8 +15,8 @@ public partial class _Default : System.Web.UI.Page
 
     protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
     {
-        Session["NumPropiedad"] = Convert.ToInt32(GridView1.SelectedRow.Cells[2].Text);
-        Label1.Text = Convert.ToString(Session["NumPropiedad"]);
+        int numeroFinca= Convert.ToInt32(GridView1.SelectedRow.Cells[2].Text);
+        Session["NumPropiedad"] = numeroFinca;
         Response.Redirect("PagarRecibos.aspx");
     }
 }

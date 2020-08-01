@@ -124,7 +124,7 @@
                                 <asp:BoundField DataField="TipoUsuario" HeaderText="TipoUsuario" SortExpression="TipoUsuario" />
                             </Columns>
                         </asp:GridView>
-                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="Data Source=DESKTOP-1V17TIN;Initial Catalog=Ejemplo;Integrated Security=True" ProviderName="System.Data.SqlClient" SelectCommand="SELECT Username, Contrasenna, TipoUsuario FROM Usuario WHERE (Activo = 1)"></asp:SqlDataSource>
+                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="Data Source=DESKTOP-COSHJ5K;Initial Catalog=Ejemplo;Integrated Security=True" ProviderName="System.Data.SqlClient" SelectCommand="SELECT Username, Contrasenna, TipoUsuario FROM Usuario WHERE (Activo = 1)"></asp:SqlDataSource>
                     </td>
                     <td class="auto-style6" colspan="2">&nbsp;</td>
                     <td class="auto-style6">&nbsp;</td>
