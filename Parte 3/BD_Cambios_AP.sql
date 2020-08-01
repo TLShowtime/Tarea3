@@ -20,6 +20,10 @@ Use [Tarea2]
 	
 
 */
+
+ALTER table dbo.ComprobantePago
+add MedioPago varchar(10) not null
+
 CREATE TABLE CCArregloPago(
 	Id int not null Primary Key Foreign Key references ConceptoCobro(Id),
 	Activo int not null
@@ -34,7 +38,7 @@ CREATE TABLE TipoMovAP(
 CREATE TABLE AP (
 	Id int not null identity(1,1) Primary Key,
 	IdPropiedad int not null Foreign Key references Propiedad(Id),
-	IdComprobante int not null Foreign Key references ComprobantePago(Id),
+	IdComprobante int Foreign Key references ComprobantePago(Id),
 	MontoOriginal money not null,
 	Saldo money not null,
 	TasaInteresAnual real not null,
@@ -62,6 +66,7 @@ CREATE TABLE MovimientosAP(
 CREATE TABLE RecibosAP (
 	Id int not null Primary Key Foreign Key references Recibo(Id),
 	IdMovimientoAP int not null Foreign Key references MovimientosAP(Id),
+	Descripcion varchar(100) not null,
 	Activo int not null
 );
 
@@ -89,4 +94,5 @@ Insert into dbo.ValoresConfiguracion(Id,IdTipo,Nombre,Valor,InsertedAt,UpdatedAt
 	1,1,'TasaInteres AP', '10.0',CONVERT(varchar,getDate()), CONVERT(varchar,getDate()),1
 );
 
-
+Insert into dbo.TipoMovAP(Id,Nombre,Activo) values 
+(1,'Credito',1),(2,'Debito',1);

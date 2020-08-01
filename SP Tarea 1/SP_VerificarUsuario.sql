@@ -21,7 +21,7 @@ BEGIN
 
 		ELSE
 		BEGIN
-			SET @outEncontrado
+			SET @outEncontrado = @IdUsuario
 		END
 		return 1
 	End try

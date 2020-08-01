@@ -1,5 +1,9 @@
 USE [Tarea2]
 
+DELETE RecibosAP
+DELETE MovimientosAP
+DELETE AP
+
 delete dbo.Corta
 delete dbo.Reconexion
 delete dbo.Movimiento
@@ -51,13 +55,14 @@ inner join dbo.ConceptoCobro C on CO.Id = C.Id
 
 ---------------------------
 
-
 DECLARE @TransConsumo table (
 		Id int identity(1,1) not null Primary Key,
 		IdMovimiento int not null, LecturaM3 int not null,
 		Descripcion varchar(100) not null, NumFinca int not null,
 		Fecha date not null
 	) 
+DECLARE @ArregloPago APTipo
+
 
 DECLARE @XMLData XML
 DECLARE @hdoc int
@@ -68,7 +73,6 @@ SET NOCOUNT ON
 SELECT @XMLData = C
 FROM OPENROWSET (BULK 'C:\Users\liugu\Desktop\Pruebas_2\Operaciones.xml',SINGLE_BLOB) AS Operaciones(C)
 EXEC sp_xml_preparedocument @hdoc OUTPUT,@XMLData
-
 
 WHILE @counterInicio <= @counterFin
 BEGIN
@@ -115,63 +119,64 @@ BEGIN
 	-- Todos los procesos tuvieron que estar en un SP para manejar errores, Trans sea a todas
 	set nocount on
 	BEGIN TRY
-		WHILE @lowMov <= @highMov
-		BEGIN
-			DECLARE @TipoMovimiento int
-			SELECT @TipoMovimiento = T.IdMovimiento
-			FROM @TransConsumo T
-			where T.Id = @lowMov
+		BEGIN TRANSACTION T1
 
-			DECLARE @idPropiedad int, @idMov int
-			SELECT @idPropiedad = P.id, @idMov = T.Id
-			from dbo.Propiedad P,@TransConsumo T
-			where T.NumFinca = P.NumeroFinca and T.Id = @lowMov
+			WHILE @lowMov <= @highMov
+			BEGIN
+				DECLARE @TipoMovimiento int
+				SELECT @TipoMovimiento = T.IdMovimiento
+				FROM @TransConsumo T
+				where T.Id = @lowMov
 
-			BEGIN TRANSACTION T1
-				-- Pagos regulares     Nuevo acumulado = P.M3ACUMULADONUEVORecibo - lectura
-				IF @TipoMovimiento = 1
-				BEGIN
-					Insert into dbo.Movimiento (PropiedadId,TipoMovId,Fecha,LecturaConsumo,MontoM3,NuevoM3Acumulado,Descripcion,Activo)
-					SELECT P.Id,T.IdMovimiento,T.Fecha,T.LecturaM3,P.M3Acumulados,P.M3Acumulados + T.LecturaM3,T.Descripcion,1
-					FROM @TransConsumo T,dbo.Propiedad P
-					WHERE T.Id = @lowMov and P.Id = @idPropiedad
+				DECLARE @idPropiedad int, @idMov int
+				SELECT @idPropiedad = P.id, @idMov = T.Id
+				from dbo.Propiedad P,@TransConsumo T
+				where T.NumFinca = P.NumeroFinca and T.Id = @lowMov
 
-					UPDATE dbo.Propiedad
-					SET Propiedad.M3Acumulados = Propiedad.M3Acumulados + T.LecturaM3
-					FROM @TransConsumo T
-					WHERE Propiedad.NumeroFinca = T.NumFinca and T.Id = @lowMov
-				END
-				-- Debito
-				IF @TipoMovimiento = 2
-				BEGIN	
-					Insert into dbo.Movimiento (PropiedadId,TipoMovId,Fecha,LecturaConsumo,MontoM3,NuevoM3Acumulado,Descripcion,Activo)
-					SELECT P.Id,T.IdMovimiento,T.Fecha,T.LecturaM3,P.M3Acumulados ,P.M3Acumulados - T.LecturaM3,T.Descripcion,1
-					FROM dbo.Propiedad P,@TransConsumo T
-					WHERE T.Id = @lowMov and P.Id = @idPropiedad
+			
+					-- Pagos regulares     Nuevo acumulado = P.M3ACUMULADONUEVORecibo - lectura
+					IF @TipoMovimiento = 1
+					BEGIN
+						Insert into dbo.Movimiento (PropiedadId,TipoMovId,Fecha,LecturaConsumo,MontoM3,NuevoM3Acumulado,Descripcion,Activo)
+						SELECT P.Id,T.IdMovimiento,T.Fecha,T.LecturaM3,P.M3Acumulados,P.M3AcumuladosUltimoRecibo + T.LecturaM3,T.Descripcion,1
+						FROM @TransConsumo T,dbo.Propiedad P
+						WHERE T.Id = @lowMov and P.Id = @idPropiedad
 
-					UPDATE dbo.Propiedad
-					SET Propiedad.M3Acumulados = Propiedad.M3Acumulados - T.LecturaM3
-					FROM @TransConsumo T
-					WHERE Propiedad.NumeroFinca = T.NumFinca and T.Id = @lowMov
-				END
-				-- Credito
-				IF @TipoMovimiento = 3
-				BEGIN	
-					Insert into dbo.Movimiento (PropiedadId,TipoMovId,Fecha,LecturaConsumo,MontoM3,NuevoM3Acumulado,Descripcion,Activo)
-					SELECT P.Id,T.IdMovimiento,T.Fecha,T.LecturaM3,P.M3Acumulados ,P.M3Acumulados + T.LecturaM3,T.Descripcion,1
-					FROM dbo.Propiedad P,@TransConsumo T
-					WHERE T.Id = @lowMov and P.Id = @idPropiedad
+						UPDATE dbo.Propiedad
+						SET Propiedad.M3Acumulados = Propiedad.M3Acumulados + T.LecturaM3
+						FROM @TransConsumo T
+						WHERE Propiedad.NumeroFinca = T.NumFinca and T.Id = @lowMov
+					END
+					-- Debito
+					IF @TipoMovimiento = 2
+					BEGIN	
+						Insert into dbo.Movimiento (PropiedadId,TipoMovId,Fecha,LecturaConsumo,MontoM3,NuevoM3Acumulado,Descripcion,Activo)
+						SELECT P.Id,T.IdMovimiento,T.Fecha,T.LecturaM3,P.M3Acumulados ,P.M3Acumulados - T.LecturaM3,T.Descripcion,1
+						FROM dbo.Propiedad P,@TransConsumo T
+						WHERE T.Id = @lowMov and P.Id = @idPropiedad
 
-					UPDATE dbo.Propiedad
-					SET Propiedad.M3Acumulados = Propiedad.M3Acumulados + T.LecturaM3
-					FROM @TransConsumo T
-					WHERE Propiedad.NumeroFinca = T.NumFinca and T.Id = @lowMov
-				END
-			COMMIT TRANSACTION T1
-			SET @lowMov = @lowMov + 1
-		END
-		
-		
+						UPDATE dbo.Propiedad
+						SET Propiedad.M3Acumulados = Propiedad.M3Acumulados - T.LecturaM3
+						FROM @TransConsumo T
+						WHERE Propiedad.NumeroFinca = T.NumFinca and T.Id = @lowMov
+					END
+					-- Credito
+					IF @TipoMovimiento = 3
+					BEGIN	
+						Insert into dbo.Movimiento (PropiedadId,TipoMovId,Fecha,LecturaConsumo,MontoM3,NuevoM3Acumulado,Descripcion,Activo)
+						SELECT P.Id,T.IdMovimiento,T.Fecha,T.LecturaM3,P.M3Acumulados ,P.M3Acumulados + T.LecturaM3,T.Descripcion,1
+						FROM dbo.Propiedad P,@TransConsumo T
+						WHERE T.Id = @lowMov and P.Id = @idPropiedad
+
+						UPDATE dbo.Propiedad
+						SET Propiedad.M3Acumulados = Propiedad.M3Acumulados + T.LecturaM3
+						FROM @TransConsumo T
+						WHERE Propiedad.NumeroFinca = T.NumFinca and T.Id = @lowMov
+					END
+				
+				SET @lowMov = @lowMov + 1
+			END
+		COMMIT TRANSACTION T1
 	END TRY
 	BEGIN CATCH 
 		IF @@TRANCOUNT > 0
@@ -302,6 +307,9 @@ BEGIN
 		PRINT('ERROR EN GENERACION DE RECIBOS')
 	END CATCH
 
+	-- Generacion de recibosAP
+	EXEC SP_Generar_RecibosAP @FechaActual
+
 	-- Pagos
 				-- <Pago TipoRecibo="1-9/11" NumFinca="1420570"/>
 	DECLARE @Pagos table(
@@ -330,22 +338,26 @@ BEGIN
 	Declare @RecibosAPagar table (
 			id int not null Primary Key identity(1,1),
 			idRecibo int not null,
-			montoInteresesMoratorios money not null
+			montoInteresesMoratorios money not null,
+			idConceptoCobro int not null
 		)
+	DECLARE @sumaTotal money 
+	DECLARE @idComprobante int
 
 	while @lowPago <= @highPago
 	BEGIN
-
-		
-
 		delete @RecibosAPagar
+		SET @sumaTotal = 0.0
+		SET @idComprobante = -1
 
-		Insert into @RecibosAPagar(idRecibo,montoInteresesMoratorios)
-		SELECT R.Id,case
-		when @FechaActual<=R.FechaVencimiento then 0 -- no tiene que generarse recibo de int moratorios
-		else (R.Monto*C.TasaIntMor/365)*abs(datediff(day, R.FechaVencimiento, @FechaActual))
-			-- SI tiene que generarse recibo
-		end
+		Insert into @RecibosAPagar(idRecibo,montoInteresesMoratorios,idConceptoCobro)
+		SELECT R.Id
+				,case
+				when @FechaActual<=R.FechaVencimiento then 0 -- no tiene que generarse recibo de int moratorios
+				else (R.Monto*C.TasaIntMor/365)*abs(datediff(day, R.FechaVencimiento, @FechaActual))
+					-- SI tiene que generarse recibo
+				end
+				,R.ConceptoCobroId
 		from dbo.Recibo R
 		inner join dbo.Propiedad Pr on R.PropiedadId = Pr.Id,
 		@Pagos P,
@@ -355,17 +367,30 @@ BEGIN
 
 		IF EXISTS (SELECT * from @RecibosAPagar)
 		BEGIN
-			DECLARE @sumaTotal money 
+			
 
 			Select @sumaTotal = sum(R.Monto + RP.montoInteresesMoratorios)
 			from @RecibosAPagar RP
 			inner join dbo.Recibo R on RP.idRecibo = R.Id
 
-			Insert dbo.ComprobantePago (Fecha,TotalPagado,Activo) values(
-				@FechaActual,@sumaTotal,1
+			DECLARE @esAP int
+					,@idAP int
+
+			SELECT @esAP = R.idConceptoCobro
+			from @RecibosAPagar R
+
+			SELECT @idAP = A.Id
+			from dbo.AP A inner join dbo.MovimientosAP M on A.Id = M.IdAP 
+				,dbo.Recibo R inner join dbo.RecibosAP RA on R.Id = RA.Id
+				,@RecibosAPagar RP
+				where RP.idRecibo = R.Id and RA.IdMovimientoAP = M.Id
+
+			Insert dbo.ComprobantePago (Fecha,TotalPagado,MedioPago,Activo) values(
+				@FechaActual,@sumaTotal,case when @esAP = 12   then 'AP# ' + CAST (@idAP AS varchar(15)) else
+												'Pago' end,1
 			)
 
-			DECLARE @idComprobante int
+			
 			Select @idComprobante = max(C.Id)
 			from dbo.ComprobantePago C
 
@@ -446,8 +471,8 @@ BEGIN
 			from @RecibosAPagarReconexion RP
 			inner join dbo.Recibo R on RP.idRecibo = R.Id
 
-			Insert dbo.ComprobantePago (Fecha,TotalPagado,Activo) values(
-				@FechaActual,@sumaTotalReconexion,1
+			Insert dbo.ComprobantePago (Fecha,TotalPagado,MedioPago,Activo) values(
+				@FechaActual,@sumaTotalReconexion,'Reconexion',1
 			)
 
 			DECLARE @idComprobanteReconexion int
@@ -488,16 +513,30 @@ BEGIN
 	AND NOT EXISTS (SELECT * from dbo.Reconexion RE where RE.ReciboReconexionId = RR.Id and RE.Activo = 1
 																	and RR.Activo = 1 and R.Estado = 0)
 			
+	-- Arreglos de Pago <AP NumFinca=h123h, Plazo=h12h/>
+	
+	
+	INSERT INTO @ArregloPago(NumeroFinca,Plazo)
+	SELECT NumeroFinca1,Plazo1
+	FROM OPENXML (@hdoc, '/Operaciones_por_Dia/OperacionDia/AP',1)
+		WITH ( 
+			NumeroFinca1 int '@NumFinca',
+			Plazo1 int '@Plazo',
+			FechaCreacion10 date '../@fecha'
+		)
+	Where (FechaCreacion10 = @FechaActual)
+	
+	IF EXISTS(SELECT * from @ArregloPago)
+	BEGIN
+		EXEC SP_Generar_AP @ArregloPago,@FechaActual
+	END
+
+	
 
 	SET		@counterInicio = @counterInicio + 1
+	DELETE @ArregloPago
 END;
 
 EXEC sp_xml_removedocument @hdoc;
 
-SELECT * from dbo.ReciboReconexion RR
-inner join dbo.Recibo R on RR.Id = R.Id
-Order by R.Estado desc
-
-Select * from dbo.Corta C
-
-Select * from dbo.Reconexion R
+SELECT * FROM dbo.ComprobantePago C where C.MedioPago LIKE 'AP#%'
