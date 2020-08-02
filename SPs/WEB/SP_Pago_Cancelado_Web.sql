@@ -8,7 +8,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE PROC SP_Pago_Cancelado_Web @inNumFinca int,@inIdReciboMayor int
+CREATE PROC SP_Pago_Cancelado_Web
 AS
 BEGIN
 	BEGIN TRY
