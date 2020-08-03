@@ -12,6 +12,17 @@
         .auto-style2 {
             width: 488px;
         }
+        .auto-style3 {
+            width: 110px;
+            height: 23px;
+        }
+        .auto-style4 {
+            width: 488px;
+            height: 23px;
+        }
+        .auto-style5 {
+            height: 23px;
+        }
     </style>
 </head>
 <body>
@@ -43,12 +54,9 @@
                 <tr>
                     <td class="auto-style1">&nbsp;</td>
                     <td class="auto-style2">
-                        <asp:ListView ID="listaPagados" runat="server" DataSourceID="SqlDataSource1" Enabled="False" Visible="False">
+                        <asp:ListView ID="listaPendientes" runat="server" DataSourceID="SqlDataSource1" Enabled="False">
                             <AlternatingItemTemplate>
-                                <li style="background-color: #FFF8DC;">Username:
-                                    <asp:Label ID="UsernameLabel" runat="server" Text='<%# Eval("Username") %>' />
-                                    <br />
-                                    NumeroFinca:
+                                <li style="background-color: #FFF8DC;">NumeroFinca:
                                     <asp:Label ID="NumeroFincaLabel" runat="server" Text='<%# Eval("NumeroFinca") %>' />
                                     <br />
                                     FechaEmision:
@@ -63,10 +71,7 @@
                                 </li>
                             </AlternatingItemTemplate>
                             <EditItemTemplate>
-                                <li style="background-color: #008A8C;color: #FFFFFF;">Username:
-                                    <asp:TextBox ID="UsernameTextBox" runat="server" Text='<%# Bind("Username") %>' />
-                                    <br />
-                                    NumeroFinca:
+                                <li style="background-color: #008A8C;color: #FFFFFF;">NumeroFinca:
                                     <asp:TextBox ID="NumeroFincaTextBox" runat="server" Text='<%# Bind("NumeroFinca") %>' />
                                     <br />
                                     FechaEmision:
@@ -78,18 +83,15 @@
                                     Monto:
                                     <asp:TextBox ID="MontoTextBox" runat="server" Text='<%# Bind("Monto") %>' />
                                     <br />
-                                    <asp:Button ID="UpdateButton" runat="server" CommandName="Update" Text="Update" />
-                                    <asp:Button ID="CancelButton" runat="server" CommandName="Cancel" Text="Cancel" />
+                                    <asp:Button ID="UpdateButton" runat="server" CommandName="Update" Text="Actualizar" />
+                                    <asp:Button ID="CancelButton" runat="server" CommandName="Cancel" Text="Cancelar" />
                                 </li>
                             </EditItemTemplate>
                             <EmptyDataTemplate>
-                                No data was returned.
+                                No se han devuelto datos.
                             </EmptyDataTemplate>
                             <InsertItemTemplate>
-                                <li style="">Username:
-                                    <asp:TextBox ID="UsernameTextBox" runat="server" Text='<%# Bind("Username") %>' />
-                                    <br />
-                                    NumeroFinca:
+                                <li style="">NumeroFinca:
                                     <asp:TextBox ID="NumeroFincaTextBox" runat="server" Text='<%# Bind("NumeroFinca") %>' />
                                     <br />
                                     FechaEmision:
@@ -101,18 +103,15 @@
                                     Monto:
                                     <asp:TextBox ID="MontoTextBox" runat="server" Text='<%# Bind("Monto") %>' />
                                     <br />
-                                    <asp:Button ID="InsertButton" runat="server" CommandName="Insert" Text="Insert" />
-                                    <asp:Button ID="CancelButton" runat="server" CommandName="Cancel" Text="Clear" />
+                                    <asp:Button ID="InsertButton" runat="server" CommandName="Insert" Text="Insertar" />
+                                    <asp:Button ID="CancelButton" runat="server" CommandName="Cancel" Text="Borrar" />
                                 </li>
                             </InsertItemTemplate>
                             <ItemSeparatorTemplate>
                                 <br />
                             </ItemSeparatorTemplate>
                             <ItemTemplate>
-                                <li style="background-color: #DCDCDC;color: #000000;">Username:
-                                    <asp:Label ID="UsernameLabel" runat="server" Text='<%# Eval("Username") %>' />
-                                    <br />
-                                    NumeroFinca:
+                                <li style="background-color: #DCDCDC;color: #000000;">NumeroFinca:
                                     <asp:Label ID="NumeroFincaLabel" runat="server" Text='<%# Eval("NumeroFinca") %>' />
                                     <br />
                                     FechaEmision:
@@ -131,13 +130,15 @@
                                     <li runat="server" id="itemPlaceholder" />
                                 </ul>
                                 <div style="text-align: center;background-color: #CCCCCC;font-family: Verdana, Arial, Helvetica, sans-serif;color: #000000;">
+                                    <asp:DataPager ID="DataPager1" runat="server">
+                                        <Fields>
+                                            <asp:NextPreviousPagerField ButtonType="Button" ShowFirstPageButton="True" ShowLastPageButton="True" />
+                                        </Fields>
+                                    </asp:DataPager>
                                 </div>
                             </LayoutTemplate>
                             <SelectedItemTemplate>
-                                <li style="background-color: #008A8C;font-weight: bold;color: #FFFFFF;">Username:
-                                    <asp:Label ID="UsernameLabel" runat="server" Text='<%# Eval("Username") %>' />
-                                    <br />
-                                    NumeroFinca:
+                                <li style="background-color: #008A8C;font-weight: bold;color: #FFFFFF;">NumeroFinca:
                                     <asp:Label ID="NumeroFincaLabel" runat="server" Text='<%# Eval("NumeroFinca") %>' />
                                     <br />
                                     FechaEmision:
@@ -152,14 +153,14 @@
                                 </li>
                             </SelectedItemTemplate>
                         </asp:ListView>
-                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="Data Source=DESKTOP-COSHJ5K;Initial Catalog=Ejemplo;Integrated Security=True" ProviderName="System.Data.SqlClient" SelectCommand="SELECT Usuario.Username, Propiedad.NumeroFinca, Recibo.FechaEmision, Recibo.FechaVencimiento, Recibo.Monto FROM Propiedad INNER JOIN ComprobantePago INNER JOIN Recibo ON ComprobantePago.Id = Recibo.ComprobanteId INNER JOIN ConceptoCobro ON Recibo.ConceptoCobroId = ConceptoCobro.Id ON Propiedad.Id = Recibo.PropiedadId INNER JOIN UsuarioDePropiedad INNER JOIN Usuario ON UsuarioDePropiedad.UsuarioId = Usuario.Id ON Propiedad.Id = UsuarioDePropiedad.PropiedadId WHERE (Recibo.Activo = 1) AND (Recibo.Estado = 0) ORDER BY Recibo.FechaEmision"></asp:SqlDataSource>
+                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="Data Source=.;Initial Catalog=Ejemplo;Integrated Security=True" ProviderName="System.Data.SqlClient" SelectCommand="SELECT Propiedad.NumeroFinca, Recibo.FechaEmision, Recibo.FechaVencimiento, Recibo.Monto FROM Propiedad INNER JOIN Recibo ON Propiedad.Id = Recibo.PropiedadId INNER JOIN UsuarioDePropiedad INNER JOIN Usuario ON UsuarioDePropiedad.UsuarioId = Usuario.Id ON Propiedad.Id = UsuarioDePropiedad.PropiedadId WHERE (Recibo.Activo = 1) AND (Recibo.Estado = 0) ORDER BY Recibo.FechaEmision"></asp:SqlDataSource>
                     </td>
                     <td>&nbsp;</td>
                 </tr>
                 <tr>
-                    <td class="auto-style1">&nbsp;</td>
-                    <td class="auto-style2">&nbsp;</td>
-                    <td>&nbsp;</td>
+                    <td class="auto-style3"></td>
+                    <td class="auto-style4"></td>
+                    <td class="auto-style5"></td>
                 </tr>
             </table>
         </div>

@@ -90,6 +90,7 @@
                     <br />
                     <br />
                     <br />
+                    <asp:Button ID="btnPagarAP" runat="server" OnClick="btnPagarAP_Click" Text="Pagar por AP" />
                     <br />
                     <br />
                     <br />

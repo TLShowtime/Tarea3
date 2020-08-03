@@ -49,10 +49,11 @@
                                 <asp:BoundField DataField="Numero" HeaderText="Numero" InsertVisible="False" ReadOnly="True" SortExpression="Numero" />
                                 <asp:BoundField DataField="Fecha" HeaderText="Fecha" SortExpression="Fecha" />
                                 <asp:BoundField DataField="TotalPagado" HeaderText="TotalPagado" SortExpression="TotalPagado" />
+                                <asp:BoundField DataField="NumeroFinca" HeaderText="NumeroFinca" SortExpression="NumeroFinca" />
                                 <asp:CommandField SelectText="Detalle" ShowSelectButton="True" />
                             </Columns>
                         </asp:GridView>
-                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="Data Source=DESKTOP-COSHJ5K;Initial Catalog=Ejemplo;Integrated Security=True" ProviderName="System.Data.SqlClient" SelectCommand="SELECT ComprobantePago.Id AS Numero, ComprobantePago.Fecha, ComprobantePago.TotalPagado FROM ConceptoCobro INNER JOIN Recibo ON ConceptoCobro.Id = Recibo.ConceptoCobroId INNER JOIN ComprobantePago ON Recibo.ComprobanteId = ComprobantePago.Id INNER JOIN Propiedad ON Recibo.PropiedadId = Propiedad.Id INNER JOIN UsuarioDePropiedad ON Propiedad.Id = UsuarioDePropiedad.PropiedadId INNER JOIN Usuario ON UsuarioDePropiedad.UsuarioId = Usuario.Id WHERE (ComprobantePago.Activo = 1) ORDER BY ComprobantePago.Fecha DESC"></asp:SqlDataSource>
+                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="Data Source=DESKTOP-COSHJ5K;Initial Catalog=Ejemplo;Integrated Security=True" ProviderName="System.Data.SqlClient" SelectCommand="SELECT ComprobantePago.Id AS Numero, ComprobantePago.Fecha, ComprobantePago.TotalPagado, Propiedad.NumeroFinca FROM ConceptoCobro INNER JOIN Recibo ON ConceptoCobro.Id = Recibo.ConceptoCobroId INNER JOIN ComprobantePago ON Recibo.ComprobanteId = ComprobantePago.Id INNER JOIN Propiedad ON Recibo.PropiedadId = Propiedad.Id INNER JOIN UsuarioDePropiedad ON Propiedad.Id = UsuarioDePropiedad.PropiedadId INNER JOIN Usuario ON UsuarioDePropiedad.UsuarioId = Usuario.Id WHERE (ComprobantePago.Activo = 1) ORDER BY ComprobantePago.Fecha DESC"></asp:SqlDataSource>
                     </td>
                     <td>&nbsp;</td>
                 </tr>

@@ -11,7 +11,7 @@ public partial class WebComprobantesPago : System.Web.UI.Page
     {
         try
         {
-            SqlDataSource1.SelectCommand = "SELECT ComprobantePago.Id AS Numero, ComprobantePago.Fecha, ComprobantePago.TotalPagado FROM ConceptoCobro INNER JOIN Recibo ON ConceptoCobro.Id = Recibo.ConceptoCobroId INNER JOIN ComprobantePago ON Recibo.ComprobanteId = ComprobantePago.Id INNER JOIN Propiedad ON Recibo.PropiedadId = Propiedad.Id INNER JOIN UsuarioDePropiedad ON Propiedad.Id = UsuarioDePropiedad.PropiedadId INNER JOIN Usuario ON UsuarioDePropiedad.UsuarioId = Usuario.Id WHERE (ComprobantePago.Activo = 1) AND Usuario.Username LIKE '%" + Convert.ToString(Session["UsuarioSesion"]) + "%' ORDER BY ComprobantePago.Fecha DESC";
+            SqlDataSource1.SelectCommand = "SELECT DISTINCT ComprobantePago.Id AS Numero, ComprobantePago.Fecha, ComprobantePago.TotalPagado,Propiedad.NumeroFinca FROM ConceptoCobro INNER JOIN Recibo ON ConceptoCobro.Id = Recibo.ConceptoCobroId INNER JOIN ComprobantePago ON Recibo.ComprobanteId = ComprobantePago.Id INNER JOIN Propiedad ON Recibo.PropiedadId = Propiedad.Id INNER JOIN UsuarioDePropiedad ON Propiedad.Id = UsuarioDePropiedad.PropiedadId INNER JOIN Usuario ON UsuarioDePropiedad.UsuarioId = Usuario.Id WHERE(ComprobantePago.Activo = 1) AND Usuario.Username LIKE '%" + Convert.ToString(Session["UsuarioSesion"]) + "%' ORDER BY ComprobantePago.Fecha DESC";
             SqlDataSource1.DataBind();
             listaComprobantes.Visible = true;
         }

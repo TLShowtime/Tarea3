@@ -47,4 +47,9 @@ public partial class _Default : System.Web.UI.Page
     {
         Response.Redirect("WebBitácora.aspx");
     }
+
+    protected void btnPagarAP_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("WebAPUsuarios.aspx");
+    }
 }
