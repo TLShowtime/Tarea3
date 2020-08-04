@@ -23,23 +23,18 @@ BEGIN
 			Id int IDENTITY(1,1) not null
 			,IdRecibo int not null
 			,idConceptoCobro int not null
-			,MontoInteresesMoratorios money not null
 			)
 
 		SET @fechaActual = GETDATE()
 
 		-- Obtiene los recibos que se han escogido sin incluir a los generados por intereses moratorios
-		INSERT INTO @RecibosAPagar (IdRecibo,MontoInteresesMoratorios,idConceptoCobro)
-		SELECT R.Id,case
-				when CONVERT(DATE,GETDATE())<=R.FechaVencimiento then 0 -- no tiene que generarse recibo de int moratorios
-				else (R.Monto*C.TasaIntMor/365)*abs(datediff(day, R.FechaVencimiento, CONVERT(DATE,GETDATE())))
-					-- SI tiene que generarse recibo
-				end,R.ConceptoCobroId
+		INSERT INTO @RecibosAPagar (IdRecibo,idConceptoCobro)
+		SELECT R.Id,R.ConceptoCobroId
 		FROM dbo.Recibo R inner join dbo.Propiedad P 
 			 on R.PropiedadId = P.Id and P.NumeroFinca = @inNumFinca and R.Id <= @inIdReciboMayor
 									 and R.Estado = 0 and R.Activo = 1
 			inner join dbo.ConceptoCobro C on R.ConceptoCobroId = C.Id
-
+		
 		-- Revisa si lo que se paga es un AP
 		SELECT @esAP = R.idConceptoCobro
 			from @RecibosAPagar R
@@ -68,7 +63,7 @@ BEGIN
 				SET [Recibo].Estado = 1,[Recibo].ComprobanteId = @idComprobante
 				from @RecibosAPagar R
 				where [Recibo].Id = R.idRecibo and [Recibo].Estado = 0
-						and [Recibo].FechaEmision <= @FechaActual and [Recibo].Activo = 1 and [Recibo].FechaEmision = @fechaActual
+						and [Recibo].FechaEmision <= @FechaActual and [Recibo].Activo = 1
 
 			-- Paga los recibos que son de intereses Moratorios
 			UPDATE [dbo].[Recibo]
