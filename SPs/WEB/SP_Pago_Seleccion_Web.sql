@@ -13,7 +13,17 @@ AS
 BEGIN
 	BEGIN TRY
 		SET NOCOUNT ON
-		
+	
+		/**DECLARE  @inNumFinca int,@inIdReciboMayor int,@outMontoAPagar decimal;
+
+		SET @inNumFinca= 2132441 
+		SET @inIdReciboMayor = 22455 */
+
+		IF EXISTS (SELECT P.Id from dbo.Propiedad P where P.NumeroFinca = @inNumFinca)
+		BEGIN
+			RETURN @@ERROR * -1
+		END;
+
 		DECLARE @sumaTotal money
 				,@fechaActual date;
 
