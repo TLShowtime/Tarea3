@@ -22,7 +22,7 @@
                 </tr>
                 <tr>
                     <td class="auto-style1">&nbsp;</td>
-                    <td>Seleccione la propiedad a la que le quiere pagar los recibos:<asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+                    <td>Seleccione la propiedad a la que le quiere pagar los recibos:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:Label ID="Label1" runat="server"></asp:Label>
                     </td>
                     <td>&nbsp;</td>
                 </tr>

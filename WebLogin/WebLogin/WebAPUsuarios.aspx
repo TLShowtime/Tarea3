@@ -57,7 +57,7 @@
                 <tr>
                     <td class="auto-style6"></td>
                     <td class="auto-style7">
-                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" Width="724px">
+                        <asp:GridView ID="listaFincas" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" Width="724px">
                             <Columns>
                                 <asp:CommandField ShowSelectButton="True" />
                                 <asp:BoundField DataField="Username" HeaderText="Username" SortExpression="Username" />

@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -20,8 +23,16 @@ public partial class _Default : System.Web.UI.Page
 
     protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
     {
-        int numeroFinca = Convert.ToInt32(GridView1.SelectedRow.Cells[2].Text);
-        Session["NumPropiedad"] = numeroFinca;
+        Session["NumPropiedad"] = Convert.ToInt32(listaFincas.SelectedRow.Cells[2].Text);
+        SqlConnection con1 = new SqlConnection(ConfigurationManager.ConnectionStrings["con"].ToString());
+        con1.Open();
+        SqlCommand cmd = new SqlCommand("SP_Crear_AP_Web", con1);
+        cmd.CommandType = CommandType.StoredProcedure;
+        cmd.Parameters.Add("@inNumFinca", SqlDbType.Int).Value = (int)Session["NumPropiedad"];
+        cmd.Parameters.Add("@outMonto", SqlDbType.Int).Value = 0;
+        Session["PagoTotal"] = (Int32)cmd.ExecuteNonQuery();
+        cmd.ExecuteNonQuery();
+        con1.Close();
         Response.Redirect("WebAP.aspx");
     }
 }

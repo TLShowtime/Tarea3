@@ -42,16 +42,14 @@
                     <td>&nbsp;</td>
                 </tr>
                 <tr>
-                    <td class="auto-style1">&nbsp;</td>
-                    <td class="auto-style2">Recibos de Intereses Moratorios:</td>
+                    <td class="auto-style1"></td>
+                    <td class="auto-style2">&nbsp;</td>
                     <td>&nbsp;</td>
                 </tr>
                 <tr>
                     <td class="auto-style1">&nbsp;</td>
                     <td class="auto-style2">
-                        <asp:GridView ID="GridView2" runat="server">
-                        </asp:GridView>
-                    </td>
+                        &nbsp;</td>
                     <td>&nbsp;</td>
                 </tr>
                 <tr>
@@ -73,9 +71,9 @@
                 <tr>
                     <td class="auto-style1">&nbsp;</td>
                     <td class="auto-style2">
-                        <asp:Button ID="btnPagar" runat="server" Text="Pagar" Width="77px" />
+                        <asp:Button ID="btnPagar" runat="server" Text="Pagar" Width="77px" OnClick="btnPagar_Click" />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" />
+                        <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" OnClick="btnCancelar_Click" />
                     </td>
                     <td>&nbsp;</td>
                 </tr>
