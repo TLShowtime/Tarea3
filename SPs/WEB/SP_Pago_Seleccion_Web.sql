@@ -13,15 +13,16 @@ AS
 BEGIN
 	BEGIN TRY
 		SET NOCOUNT ON
-	
-		/**DECLARE  @inNumFinca int,@inIdReciboMayor int,@outMontoAPagar decimal;
+	/*
+		DECLARE  @inNumFinca int,@inIdReciboMayor int,@outMontoAPagar decimal;
 
 		SET @inNumFinca= 2132441 
-		SET @inIdReciboMayor = 22455 */
+		SET @inIdReciboMayor = 22455*/
 
-		IF EXISTS (SELECT P.Id from dbo.Propiedad P where P.NumeroFinca = @inNumFinca)
+
+		IF NOT EXISTS (SELECT P.Id from dbo.Propiedad P where P.NumeroFinca = @inNumFinca)
 		BEGIN
-			RETURN @@ERROR * -1
+			RETURN -2
 		END;
 
 		DECLARE @sumaTotal money
@@ -52,6 +53,8 @@ BEGIN
 			from @RecibosAPagar RP
 			inner join dbo.Recibo R on RP.idRecibo = R.Id
 
+		SELECT @outMontoAPagar = CONVERT(decimal,@sumaTotal)
+
 		BEGIN TRAN
 
 				-- Crea los recibos de Intereses Moratorios
@@ -66,8 +69,6 @@ BEGIN
 
 		COMMIT
 
-		SELECT @outMontoAPagar = CONVERT(decimal,@sumaTotal)
-
 		RETURN 1 -- Exito
 	END TRY
 
@@ -78,3 +79,4 @@ BEGIN
 		RETURN @@ERROR *-1 
 	END CATCH
 END;
+
