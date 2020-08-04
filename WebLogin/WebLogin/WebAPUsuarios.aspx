@@ -51,6 +51,8 @@
                     <td class="auto-style5">Usuario:&nbsp;&nbsp;&nbsp;
                         <asp:TextBox ID="txtUsuarioNombre" runat="server"></asp:TextBox>
                         <asp:Button ID="btnBuscar" runat="server" OnClick="btnBuscar_Click" Text="Buscar" />
+                    &nbsp;&nbsp;&nbsp;
+                        <asp:Label ID="Label1" runat="server"></asp:Label>
                     </td>
                     <td class="auto-style1"></td>
                 </tr>

@@ -42,7 +42,6 @@
                     <td class="auto-style2">
                         <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1">
                             <Columns>
-                                <asp:CommandField ShowSelectButton="True" />
                                 <asp:BoundField DataField="Username" HeaderText="Username" SortExpression="Username" />
                                 <asp:BoundField DataField="NumeroFinca" HeaderText="NumeroFinca" SortExpression="NumeroFinca" />
                                 <asp:BoundField DataField="FechaEmision" HeaderText="FechaEmision" SortExpression="FechaEmision" />

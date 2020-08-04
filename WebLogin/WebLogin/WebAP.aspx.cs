@@ -20,23 +20,22 @@ public partial class _Default : System.Web.UI.Page
 
     protected void btnPagar_Click(object sender, EventArgs e)
     {
-        try
-        {
             SqlConnection con1 = new SqlConnection(ConfigurationManager.ConnectionStrings["con"].ToString());
-            con1.Open();
+
             SqlCommand cmd = new SqlCommand("SP_Crear_AP_Confirmado_Web", con1);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add("@inNumFinca", SqlDbType.Int).Value = (int)Session["NumPropiedad"];
-            cmd.Parameters.Add("@inPlazo", SqlDbType.Int).Value = (int.Parse(txtCantidadMeses.Text));
-            cmd.Parameters.Add("@inMontoTotal", SqlDbType.Int).Value = (int)Session["PagoTotal"];
+            cmd.Parameters.Add("@inNumFinca", SqlDbType.Int);
+            cmd.Parameters.Add("@inPlazo", SqlDbType.Int);
+            cmd.Parameters.Add("@inMontoTotal", SqlDbType.Decimal);
+
+            // Setea valores
+            cmd.Parameters["@inNumFinca"].Value = (int)Session["NumPropiedad"];
+            cmd.Parameters["@inPlazo"].Value = (int.Parse(txtCantidadMeses.Text));
+            cmd.Parameters["@inMontoTotal"].Value = (decimal)Session["PagoTotal"];
+            con1.Open();
             cmd.ExecuteNonQuery();
             con1.Close();
             Response.Redirect("WebAdmin.aspx");
-        }
-        catch
-        {
-            Label1.Text = "Error al procesar la solicitud";
-        }
     }
 
     protected void btnCancelar_Click(object sender, EventArgs e)

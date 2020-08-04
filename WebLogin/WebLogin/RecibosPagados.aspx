@@ -59,9 +59,6 @@
                                     Monto:
                                     <asp:Label ID="MontoLabel" runat="server" Text='<%# Eval("Monto") %>' />
                                     <br />
-                                    NombrePropietario:
-                                    <asp:Label ID="NombrePropietarioLabel" runat="server" Text='<%# Eval("NombrePropietario") %>' />
-                                    <br />
                                 </li>
                             </AlternatingItemTemplate>
                             <EditItemTemplate>
@@ -80,15 +77,12 @@
                                     Monto:
                                     <asp:TextBox ID="MontoTextBox" runat="server" Text='<%# Bind("Monto") %>' />
                                     <br />
-                                    NombrePropietario:
-                                    <asp:TextBox ID="NombrePropietarioTextBox" runat="server" Text='<%# Bind("NombrePropietario") %>' />
-                                    <br />
-                                    <asp:Button ID="UpdateButton" runat="server" CommandName="Update" Text="Update" />
-                                    <asp:Button ID="CancelButton" runat="server" CommandName="Cancel" Text="Cancel" />
+                                    <asp:Button ID="UpdateButton" runat="server" CommandName="Update" Text="Actualizar" />
+                                    <asp:Button ID="CancelButton" runat="server" CommandName="Cancel" Text="Cancelar" />
                                 </li>
                             </EditItemTemplate>
                             <EmptyDataTemplate>
-                                No data was returned.
+                                No se han devuelto datos.
                             </EmptyDataTemplate>
                             <InsertItemTemplate>
                                 <li style="">Username:
@@ -101,11 +95,9 @@
                                     <asp:TextBox ID="FechaVencimientoTextBox" runat="server" Text='<%# Bind("FechaVencimiento") %>' />
                                     <br />Monto:
                                     <asp:TextBox ID="MontoTextBox" runat="server" Text='<%# Bind("Monto") %>' />
-                                    <br />NombrePropietario:
-                                    <asp:TextBox ID="NombrePropietarioTextBox" runat="server" Text='<%# Bind("NombrePropietario") %>' />
                                     <br />
-                                    <asp:Button ID="InsertButton" runat="server" CommandName="Insert" Text="Insert" />
-                                    <asp:Button ID="CancelButton" runat="server" CommandName="Cancel" Text="Clear" />
+                                    <asp:Button ID="InsertButton" runat="server" CommandName="Insert" Text="Insertar" />
+                                    <asp:Button ID="CancelButton" runat="server" CommandName="Cancel" Text="Borrar" />
                                 </li>
                             </InsertItemTemplate>
                             <ItemSeparatorTemplate>
@@ -126,9 +118,6 @@
                                     <br />
                                     Monto:
                                     <asp:Label ID="MontoLabel" runat="server" Text='<%# Eval("Monto") %>' />
-                                    <br />
-                                    NombrePropietario:
-                                    <asp:Label ID="NombrePropietarioLabel" runat="server" Text='<%# Eval("NombrePropietario") %>' />
                                     <br />
                                 </li>
                             </ItemTemplate>
@@ -155,13 +144,10 @@
                                     Monto:
                                     <asp:Label ID="MontoLabel" runat="server" Text='<%# Eval("Monto") %>' />
                                     <br />
-                                    NombrePropietario:
-                                    <asp:Label ID="NombrePropietarioLabel" runat="server" Text='<%# Eval("NombrePropietario") %>' />
-                                    <br />
                                 </li>
                             </SelectedItemTemplate>
                         </asp:ListView>
-                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="Data Source=DESKTOP-COSHJ5K;Initial Catalog=Ejemplo;Integrated Security=True" ProviderName="System.Data.SqlClient" SelectCommand="SELECT Usuario.Username, Propiedad.NumeroFinca, Recibo.FechaEmision, Recibo.FechaVencimiento, Recibo.Monto, Propietario.Nombre AS NombrePropietario FROM Recibo INNER JOIN ComprobantePago ON Recibo.ComprobanteId = ComprobantePago.Id INNER JOIN ConceptoCobro ON Recibo.ConceptoCobroId = ConceptoCobro.Id INNER JOIN Propiedad ON Recibo.PropiedadId = Propiedad.Id INNER JOIN UsuarioDePropiedad ON Propiedad.Id = UsuarioDePropiedad.PropiedadId INNER JOIN Usuario ON UsuarioDePropiedad.UsuarioId = Usuario.Id INNER JOIN PropietarioDePropiedad ON Propiedad.Id = PropietarioDePropiedad.PropiedadId INNER JOIN Propietario ON PropietarioDePropiedad.PropietarioId = Propietario.Id WHERE (Recibo.Activo = 1) AND (Recibo.Estado = 1)"></asp:SqlDataSource>
+                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="Data Source=.;Initial Catalog=Ejemplo;Integrated Security=True" ProviderName="System.Data.SqlClient" SelectCommand="SELECT Usuario.Username, Propiedad.NumeroFinca, Recibo.FechaEmision, Recibo.FechaVencimiento, Recibo.Monto FROM Recibo INNER JOIN ComprobantePago ON Recibo.ComprobanteId = ComprobantePago.Id INNER JOIN ConceptoCobro ON Recibo.ConceptoCobroId = ConceptoCobro.Id INNER JOIN Propiedad ON Recibo.PropiedadId = Propiedad.Id INNER JOIN UsuarioDePropiedad ON Propiedad.Id = UsuarioDePropiedad.PropiedadId INNER JOIN Usuario ON UsuarioDePropiedad.UsuarioId = Usuario.Id INNER JOIN PropietarioDePropiedad ON Propiedad.Id = PropietarioDePropiedad.PropiedadId INNER JOIN Propietario ON PropietarioDePropiedad.PropietarioId = Propietario.Id WHERE (Recibo.Activo = 1) AND (Recibo.Estado = 1)"></asp:SqlDataSource>
                     </td>
                     <td>&nbsp;</td>
                 </tr>

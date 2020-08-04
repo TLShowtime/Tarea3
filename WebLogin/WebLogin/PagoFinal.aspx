@@ -42,13 +42,24 @@
                 </tr>
                 <tr>
                     <td class="auto-style1"></td>
-                    <td class="auto-style2">&nbsp;</td>
+                    <td class="auto-style2">Recibos de Intereses Moratorios:</td>
                     <td>&nbsp;</td>
                 </tr>
                 <tr>
                     <td class="auto-style1">&nbsp;</td>
                     <td class="auto-style2">
-                        &nbsp;</td>
+                        <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" DataSourceID="SqlDataSource2">
+                            <Columns>
+                                <asp:BoundField DataField="Id" HeaderText="Numero" InsertVisible="False" ReadOnly="True" SortExpression="Id" />
+                                <asp:BoundField DataField="Username" HeaderText="Username" SortExpression="Username" />
+                                <asp:BoundField DataField="NumeroFinca" HeaderText="NumeroFinca" SortExpression="NumeroFinca" />
+                                <asp:BoundField DataField="FechaEmision" HeaderText="FechaEmision" SortExpression="FechaEmision" />
+                                <asp:BoundField DataField="FechaVencimiento" HeaderText="FechaVencimiento" SortExpression="FechaVencimiento" />
+                                <asp:BoundField DataField="Monto" HeaderText="Monto" SortExpression="Monto" />
+                            </Columns>
+                        </asp:GridView>
+                        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="Data Source=.;Initial Catalog=Ejemplo;Integrated Security=True" ProviderName="System.Data.SqlClient" SelectCommand="SELECT Usuario.Username, Propiedad.NumeroFinca, Recibo.FechaEmision, Recibo.FechaVencimiento, Recibo.Monto, Recibo.Id FROM Propiedad INNER JOIN Recibo ON Propiedad.Id = Recibo.PropiedadId INNER JOIN UsuarioDePropiedad INNER JOIN Usuario ON UsuarioDePropiedad.UsuarioId = Usuario.Id ON Propiedad.Id = UsuarioDePropiedad.PropiedadId WHERE (Recibo.Activo = 1) AND (Recibo.Estado = 0) ORDER BY Recibo.FechaEmision"></asp:SqlDataSource>
+                    </td>
                     <td>&nbsp;</td>
                 </tr>
                 <tr>

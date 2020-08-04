@@ -26,7 +26,9 @@ public partial class PagarRecibos : System.Web.UI.Page
     protected void GridView1_SelectedIndexChanged1(object sender, EventArgs e)
     {
         mayor = Convert.ToInt32(GridView1.SelectedRow.Cells[1].Text);
+        int reciboIM = Convert.ToInt32(GridView1.Rows[GridView1.Rows.Count-1].Cells[1].Text);
         Session["ReciboGuia"] = mayor;
+        Session["ReciboIM"] = reciboIM;
     }
     protected void Button1_Click(object sender, EventArgs e)
     {
@@ -40,21 +42,18 @@ public partial class PagarRecibos : System.Web.UI.Page
             cmd.Parameters.Add("@outMontoAPagar", SqlDbType.Decimal).Direction = ParameterDirection.Output;
 
             // Setea valores
-            cmd.Parameters["@inNumFinca"].Value =2132441;
-            cmd.Parameters["@inIdReciboMayor"].Value = 22455;
+            cmd.Parameters["@inNumFinca"].Value = Convert.ToInt32(Session["NumPropiedad"]);
+            cmd.Parameters["@inIdReciboMayor"].Value = Convert.ToInt32(Session["ReciboGuia"]);
 
             SqlParameter returnParameter = cmd.Parameters.Add("RetVal", SqlDbType.Int);
             returnParameter.Direction = ParameterDirection.ReturnValue;
             con1.Open();
             cmd.ExecuteNonQuery();
-
-            Label1.Text = cmd.Parameters["@outMontoAPagar"].Value.ToString();
-            int result = (int)returnParameter.Value;
+            Session["PagoTotal"]= cmd.Parameters["@outMontoAPagar"].Value;
             con1.Close();
-            Label2.Text = Convert.ToString(result.ToString());
-            // Response.Redirect("PagoFinal.aspx");
+            Response.Redirect("PagoFinal.aspx");
         }
-        //Label1.Text = "Usted no tiene recibos pendientes";
+        Label1.Text = "Usted no tiene recibos pendientes";
     }
 
 

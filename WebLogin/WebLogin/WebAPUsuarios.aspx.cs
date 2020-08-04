@@ -23,16 +23,26 @@ public partial class _Default : System.Web.UI.Page
 
     protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
     {
-        Session["NumPropiedad"] = Convert.ToInt32(listaFincas.SelectedRow.Cells[2].Text);
-        SqlConnection con1 = new SqlConnection(ConfigurationManager.ConnectionStrings["con"].ToString());
-        con1.Open();
-        SqlCommand cmd = new SqlCommand("SP_Crear_AP_Web", con1);
-        cmd.CommandType = CommandType.StoredProcedure;
-        cmd.Parameters.Add("@inNumFinca", SqlDbType.Int).Value = (int)Session["NumPropiedad"];
-        cmd.Parameters.Add("@outMonto", SqlDbType.Int).Value = 0;
-        Session["PagoTotal"] = (Int32)cmd.ExecuteNonQuery();
-        cmd.ExecuteNonQuery();
-        con1.Close();
-        Response.Redirect("WebAP.aspx");
+        if (listaFincas.Rows.Count != 0)
+        {
+            Session["NumPropiedad"] = Convert.ToInt32(listaFincas.SelectedRow.Cells[2].Text);
+            SqlConnection con1 = new SqlConnection(ConfigurationManager.ConnectionStrings["con"].ToString());
+
+            SqlCommand cmd = new SqlCommand("SP_Crear_AP_Web", con1);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("@inNumFinca", SqlDbType.Int);
+            cmd.Parameters.Add("@outMonto", SqlDbType.Decimal).Direction = ParameterDirection.Output;
+
+            cmd.Parameters["@inNumFinca"].Value = Convert.ToInt32(Session["NumPropiedad"]);
+
+            con1.Open();
+            cmd.ExecuteNonQuery();
+            Session["PagoTotal"] = cmd.Parameters["@outMonto"].Value;
+            con1.Close();
+            Response.Redirect("WebAP.aspx");
+        
+        }
+        Label1.Text = "Usted no tiene recibos pendientes";
+
     }
 }
