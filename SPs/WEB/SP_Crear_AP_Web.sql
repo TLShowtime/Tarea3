@@ -58,7 +58,7 @@ BEGIN
 
 		COMMIT
 
-		SET @outMonto = CONVERT (decimal,@montoTotal)
+		SELECT @outMonto = CONVERT (decimal,@montoTotal)
 
 		RETURN 1 -- Exito
 	END TRY

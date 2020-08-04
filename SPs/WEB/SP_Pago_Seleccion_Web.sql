@@ -56,7 +56,7 @@ BEGIN
 
 		COMMIT
 
-		SET @outMontoAPagar = CONVERT(decimal,@sumaTotal)
+		SELECT @outMontoAPagar = CONVERT(decimal,@sumaTotal)
 
 		RETURN 1 -- Exito
 	END TRY
