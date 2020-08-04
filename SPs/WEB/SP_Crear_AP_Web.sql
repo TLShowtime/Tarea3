@@ -50,6 +50,7 @@ BEGIN
 			from dbo.Recibo R,dbo.ConceptoCobro C inner join dbo.CCInteresesMoratorios CIM on C.Id = CIM.Id
 			where @idPropiedad = R.PropiedadId and R.Estado = 0 and R.Activo = 1
 			and GETDATE() > R.FechaVencimiento
+			and (R.Monto*C.TasaIntMor/365)*abs(datediff(day, R.FechaVencimiento, GETDATE())) > 0.0
 
 			-- Suma los montos de los recibos pendientes de una propiedad
 			SELECT @montoTotal = sum(R.Monto)
