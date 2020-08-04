@@ -20,7 +20,9 @@
             <table style="width:100%;">
                 <tr>
                     <td class="auto-style1">&nbsp;</td>
-                    <td class="auto-style2" colspan="2">Seleccione los recibos que quiere pagar:</td>
+                    <td class="auto-style2" colspan="2">Seleccione los recibos que quiere pagar:<asp:Label ID="Label2" runat="server"></asp:Label>
+                        <asp:Label ID="Label1" runat="server"></asp:Label>
+                    </td>
                     <td>&nbsp;</td>
                 </tr>
                 <tr>
@@ -44,7 +46,6 @@
                 <tr>
                     <td class="auto-style1">&nbsp;</td>
                     <td>
-                        <asp:Label ID="Label1" runat="server"></asp:Label>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Pagar" Width="100px" />
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
