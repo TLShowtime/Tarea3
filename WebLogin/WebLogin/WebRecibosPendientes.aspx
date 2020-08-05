@@ -7,13 +7,13 @@
     <title></title>
     <style type="text/css">
         .auto-style1 {
-            width: 110px;
+            width: 648px;
         }
         .auto-style2 {
             width: 488px;
         }
         .auto-style3 {
-            width: 110px;
+            width: 648px;
             height: 23px;
         }
         .auto-style4 {
@@ -27,7 +27,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
+        <div style="font-family: 'Gloucester MT Extra Condensed'; font-size: large; font-weight: 500; color: #FFFFFF; text-align: center; background-image: url('ruinasFondoPaginas.jpg'); background-repeat: no-repeat; background-attachment: scroll; background-position: left top; border-style: groove; width: auto; height: 960px">
             <table style="width:100%;">
                 <tr>
                     <td class="auto-style1">&nbsp;</td>
@@ -54,106 +54,15 @@
                 <tr>
                     <td class="auto-style1">&nbsp;</td>
                     <td class="auto-style2">
-                        <asp:ListView ID="listaPendientes" runat="server" DataSourceID="SqlDataSource1" Enabled="False">
-                            <AlternatingItemTemplate>
-                                <li style="background-color: #FFF8DC;">NumeroFinca:
-                                    <asp:Label ID="NumeroFincaLabel" runat="server" Text='<%# Eval("NumeroFinca") %>' />
-                                    <br />
-                                    FechaEmision:
-                                    <asp:Label ID="FechaEmisionLabel" runat="server" Text='<%# Eval("FechaEmision") %>' />
-                                    <br />
-                                    FechaVencimiento:
-                                    <asp:Label ID="FechaVencimientoLabel" runat="server" Text='<%# Eval("FechaVencimiento") %>' />
-                                    <br />
-                                    Monto:
-                                    <asp:Label ID="MontoLabel" runat="server" Text='<%# Eval("Monto") %>' />
-                                    <br />
-                                </li>
-                            </AlternatingItemTemplate>
-                            <EditItemTemplate>
-                                <li style="background-color: #008A8C;color: #FFFFFF;">NumeroFinca:
-                                    <asp:TextBox ID="NumeroFincaTextBox" runat="server" Text='<%# Bind("NumeroFinca") %>' />
-                                    <br />
-                                    FechaEmision:
-                                    <asp:TextBox ID="FechaEmisionTextBox" runat="server" Text='<%# Bind("FechaEmision") %>' />
-                                    <br />
-                                    FechaVencimiento:
-                                    <asp:TextBox ID="FechaVencimientoTextBox" runat="server" Text='<%# Bind("FechaVencimiento") %>' />
-                                    <br />
-                                    Monto:
-                                    <asp:TextBox ID="MontoTextBox" runat="server" Text='<%# Bind("Monto") %>' />
-                                    <br />
-                                    <asp:Button ID="UpdateButton" runat="server" CommandName="Update" Text="Actualizar" />
-                                    <asp:Button ID="CancelButton" runat="server" CommandName="Cancel" Text="Cancelar" />
-                                </li>
-                            </EditItemTemplate>
-                            <EmptyDataTemplate>
-                                No se han devuelto datos.
-                            </EmptyDataTemplate>
-                            <InsertItemTemplate>
-                                <li style="">NumeroFinca:
-                                    <asp:TextBox ID="NumeroFincaTextBox" runat="server" Text='<%# Bind("NumeroFinca") %>' />
-                                    <br />
-                                    FechaEmision:
-                                    <asp:TextBox ID="FechaEmisionTextBox" runat="server" Text='<%# Bind("FechaEmision") %>' />
-                                    <br />
-                                    FechaVencimiento:
-                                    <asp:TextBox ID="FechaVencimientoTextBox" runat="server" Text='<%# Bind("FechaVencimiento") %>' />
-                                    <br />
-                                    Monto:
-                                    <asp:TextBox ID="MontoTextBox" runat="server" Text='<%# Bind("Monto") %>' />
-                                    <br />
-                                    <asp:Button ID="InsertButton" runat="server" CommandName="Insert" Text="Insertar" />
-                                    <asp:Button ID="CancelButton" runat="server" CommandName="Cancel" Text="Borrar" />
-                                </li>
-                            </InsertItemTemplate>
-                            <ItemSeparatorTemplate>
-                                <br />
-                            </ItemSeparatorTemplate>
-                            <ItemTemplate>
-                                <li style="background-color: #DCDCDC;color: #000000;">NumeroFinca:
-                                    <asp:Label ID="NumeroFincaLabel" runat="server" Text='<%# Eval("NumeroFinca") %>' />
-                                    <br />
-                                    FechaEmision:
-                                    <asp:Label ID="FechaEmisionLabel" runat="server" Text='<%# Eval("FechaEmision") %>' />
-                                    <br />
-                                    FechaVencimiento:
-                                    <asp:Label ID="FechaVencimientoLabel" runat="server" Text='<%# Eval("FechaVencimiento") %>' />
-                                    <br />
-                                    Monto:
-                                    <asp:Label ID="MontoLabel" runat="server" Text='<%# Eval("Monto") %>' />
-                                    <br />
-                                </li>
-                            </ItemTemplate>
-                            <LayoutTemplate>
-                                <ul id="itemPlaceholderContainer" runat="server" style="font-family: Verdana, Arial, Helvetica, sans-serif;">
-                                    <li runat="server" id="itemPlaceholder" />
-                                </ul>
-                                <div style="text-align: center;background-color: #CCCCCC;font-family: Verdana, Arial, Helvetica, sans-serif;color: #000000;">
-                                    <asp:DataPager ID="DataPager1" runat="server">
-                                        <Fields>
-                                            <asp:NextPreviousPagerField ButtonType="Button" ShowFirstPageButton="True" ShowLastPageButton="True" />
-                                        </Fields>
-                                    </asp:DataPager>
-                                </div>
-                            </LayoutTemplate>
-                            <SelectedItemTemplate>
-                                <li style="background-color: #008A8C;font-weight: bold;color: #FFFFFF;">NumeroFinca:
-                                    <asp:Label ID="NumeroFincaLabel" runat="server" Text='<%# Eval("NumeroFinca") %>' />
-                                    <br />
-                                    FechaEmision:
-                                    <asp:Label ID="FechaEmisionLabel" runat="server" Text='<%# Eval("FechaEmision") %>' />
-                                    <br />
-                                    FechaVencimiento:
-                                    <asp:Label ID="FechaVencimientoLabel" runat="server" Text='<%# Eval("FechaVencimiento") %>' />
-                                    <br />
-                                    Monto:
-                                    <asp:Label ID="MontoLabel" runat="server" Text='<%# Eval("Monto") %>' />
-                                    <br />
-                                </li>
-                            </SelectedItemTemplate>
-                        </asp:ListView>
                         <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="Data Source=.;Initial Catalog=Ejemplo;Integrated Security=True" ProviderName="System.Data.SqlClient" SelectCommand="SELECT Propiedad.NumeroFinca, Recibo.FechaEmision, Recibo.FechaVencimiento, Recibo.Monto FROM Propiedad INNER JOIN Recibo ON Propiedad.Id = Recibo.PropiedadId INNER JOIN UsuarioDePropiedad INNER JOIN Usuario ON UsuarioDePropiedad.UsuarioId = Usuario.Id ON Propiedad.Id = UsuarioDePropiedad.PropiedadId WHERE (Recibo.Activo = 1) AND (Recibo.Estado = 0) ORDER BY Recibo.FechaEmision"></asp:SqlDataSource>
+                        <asp:GridView ID="listaPendientes" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="#666666" BorderColor="White" DataSourceID="SqlDataSource1" ForeColor="White" PageSize="20">
+                            <Columns>
+                                <asp:BoundField DataField="NumeroFinca" HeaderText="NumeroFinca" SortExpression="NumeroFinca" />
+                                <asp:BoundField DataField="FechaEmision" HeaderText="FechaEmision" SortExpression="FechaEmision" />
+                                <asp:BoundField DataField="FechaVencimiento" HeaderText="FechaVencimiento" SortExpression="FechaVencimiento" />
+                                <asp:BoundField DataField="Monto" HeaderText="Monto" SortExpression="Monto" />
+                            </Columns>
+                        </asp:GridView>
                     </td>
                     <td>&nbsp;</td>
                 </tr>

@@ -7,17 +7,24 @@
     <title></title>
     <style type="text/css">
         .auto-style1 {
-            width: 183px;
+            width: 639px;
         }
         .auto-style2 {
             width: 567px;
+        }
+        .auto-style3 {
+            width: auto;
+            height: 960px;
+        }
+        .auto-style4 {
+            margin-left: 56px;
         }
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
-            <table style="width:100%;">
+        <div class="auto-style3" style="font-family: 'Gloucester MT Extra Condensed'; font-size: x-large; font-weight: 500; color: #FFFFFF; text-align: center; background-image: url('ruinasFondoPaginas.jpg'); background-repeat: no-repeat; background-attachment: scroll; background-position: left top; border-style: groove;">
+            <table style="width:100%; color: #FFFFFF; text-align: center;">
                 <tr>
                     <td class="auto-style1">&nbsp;</td>
                     <td class="auto-style2">Creación de AP:</td>
@@ -40,7 +47,7 @@
                 <tr>
                     <td class="auto-style1">&nbsp;</td>
                     <td class="auto-style2">
-                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1">
+                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" AllowPaging="True" BackColor="#666666" BorderColor="White" CssClass="auto-style4" ForeColor="White" PageSize="17">
                             <Columns>
                                 <asp:BoundField DataField="Username" HeaderText="Username" SortExpression="Username" />
                                 <asp:BoundField DataField="NumeroFinca" HeaderText="NumeroFinca" SortExpression="NumeroFinca" />

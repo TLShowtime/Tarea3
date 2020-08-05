@@ -9,12 +9,16 @@
         .auto-style1 {
             width: 95px;
         }
+        .auto-style2 {
+            margin-left: 540px;
+            margin-top: 79px;
+        }
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
-            <table style="width: 100%;">
+        <div style="font-family: 'Gloucester MT Extra Condensed'; font-size: large; font-weight: 500; color: #FFFFFF; text-align: center; background-image: url('ruinasFondoPaginas.jpg'); background-repeat: no-repeat; background-attachment: scroll; background-position: left top; border-style: groove; width: auto; height: 960px">
+            <table style="width: 100%; text-align: center;">
                 <tr>
                     <td class="auto-style1">&nbsp;</td>
                     <td>&nbsp;</td>
@@ -29,7 +33,7 @@
                 <tr>
                     <td class="auto-style1">&nbsp;</td>
                     <td>
-                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" Width="608px">
+                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" Width="608px" AllowPaging="True" BackColor="#666666" BorderColor="White" CssClass="auto-style2" ForeColor="White">
                             <Columns>
                                 <asp:CommandField ShowSelectButton="True" />
                                 <asp:BoundField DataField="Username" HeaderText="Username" SortExpression="Username" />

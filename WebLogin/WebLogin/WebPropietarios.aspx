@@ -30,11 +30,14 @@
         .auto-style10 {
             width: 706px;
         }
+        .auto-style11 {
+            margin-left: 185px;
+        }
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
+        <div style="font-family: 'Gloucester MT Extra Condensed'; font-size: large; font-weight: 500; color: #FFFFFF; background-image: url('ruinasFondoPaginas.jpg'); background-repeat: no-repeat; background-attachment: scroll; background-position: left top; border-style: groove; width: auto; height: 960px">
             <table class="auto-style3">
                 <tr>
                     <td class="auto-style1">&nbsp;</td>
@@ -143,7 +146,7 @@
                         &nbsp;</td>
                 </tr>
             </table>
-            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" Width="473px">
+            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" Width="741px" AllowPaging="True" BackColor="#666666" BorderColor="White" CssClass="auto-style11" ForeColor="White" PageSize="17">
                 <Columns>
                     <asp:BoundField DataField="Nombre" HeaderText="Nombre" SortExpression="Nombre" />
                     <asp:BoundField DataField="Identificacion" HeaderText="Identificacion" SortExpression="Identificacion" />

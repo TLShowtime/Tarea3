@@ -114,8 +114,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
-        </div>
+        <div style="font-family: 'Gloucester MT Extra Condensed'; font-size: large; font-weight: 500; color: #FFFFFF; background-image: url('ruinasFondoPaginas.jpg'); border-style: groove; width: auto; height: 960px">
         <table style="width:100%;">
             <tr>
                 <td class="auto-style26">Usuarios vs Propiedades</td>
@@ -219,22 +218,13 @@
                     <table style="width:100%;">
                         <tr>
                             <td class="auto-style21" colspan="3">
-                                <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" BackColor="#CCCCCC" BorderColor="#999999" BorderStyle="Solid" BorderWidth="3px" CellPadding="4" CellSpacing="2" ForeColor="Black" Width="840px">
+                                <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" BackColor="#666666" BorderColor="White" ForeColor="White" Width="840px" AllowPaging="True">
                                     <Columns>
                                         <asp:BoundField DataField="Username" HeaderText="Username" SortExpression="Username" />
                                         <asp:BoundField DataField="NumeroFinca" HeaderText="NumeroFinca" SortExpression="NumeroFinca" />
                                         <asp:BoundField DataField="Direccion" HeaderText="Direccion" SortExpression="Direccion" />
                                         <asp:BoundField DataField="Valor" HeaderText="Valor" SortExpression="Valor" />
                                     </Columns>
-                                    <FooterStyle BackColor="#CCCCCC" />
-                                    <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
-                                    <PagerStyle BackColor="#CCCCCC" ForeColor="Black" HorizontalAlign="Left" />
-                                    <RowStyle BackColor="White" />
-                                    <SelectedRowStyle BackColor="#000099" Font-Bold="True" ForeColor="White" />
-                                    <SortedAscendingCellStyle BackColor="#F1F1F1" />
-                                    <SortedAscendingHeaderStyle BackColor="#808080" />
-                                    <SortedDescendingCellStyle BackColor="#CAC9C9" />
-                                    <SortedDescendingHeaderStyle BackColor="#383838" />
                                 </asp:GridView>
                                     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="Data Source=.;Initial Catalog=Ejemplo;Integrated Security=True" ProviderName="System.Data.SqlClient" SelectCommand="SELECT Usuario.Username, Propiedad.NumeroFinca, Propiedad.Direccion, Propiedad.Valor FROM Usuario INNER JOIN UsuarioDePropiedad ON Usuario.Id = UsuarioDePropiedad.UsuarioId INNER JOIN Propiedad ON UsuarioDePropiedad.PropiedadId = Propiedad.Id WHERE (UsuarioDePropiedad.Activo = 1)"></asp:SqlDataSource>
                                     </td>
@@ -254,6 +244,7 @@
                         <td>&nbsp;</td>
                     </tr>
                 </table>
+        </div>
             </form>
         </body>
         </html>

@@ -7,21 +7,32 @@
     <title>Comprobantes de Pago</title>
     <style type="text/css">
         .auto-style1 {
-            width: 131px;
+            width: 602px;
         }
         .auto-style2 {
             width: 390px;
+        }
+        .auto-style3 {
+            width: 602px;
+            height: 23px;
+        }
+        .auto-style4 {
+            width: 390px;
+            height: 23px;
+        }
+        .auto-style5 {
+            height: 23px;
         }
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
+        <div style="font-family: 'Gloucester MT Extra Condensed'; font-size: large; font-weight: 500; color: #FFFFFF; text-align: center; background-image: url('ruinasFondoPaginas.jpg'); border-style: groove; width: auto; height: 960px">
             <table style="width:100%;">
                 <tr>
-                    <td class="auto-style1">&nbsp;</td>
-                    <td class="auto-style2">COMPROBANTES DE PAGO:</td>
-                    <td>&nbsp;</td>
+                    <td class="auto-style3"></td>
+                    <td class="auto-style4">COMPROBANTES DE PAGO:</td>
+                    <td class="auto-style5"></td>
                 </tr>
                 <tr>
                     <td class="auto-style1">&nbsp;</td>
@@ -44,7 +55,7 @@
                 <tr>
                     <td class="auto-style1">&nbsp;</td>
                     <td class="auto-style2">
-                        <asp:GridView ID="listaComprobantes" runat="server" AutoGenerateColumns="False" DataKeyNames="Numero" DataSourceID="SqlDataSource1" OnSelectedIndexChanged="listaComprobantes_SelectedIndexChanged">
+                        <asp:GridView ID="listaComprobantes" runat="server" AutoGenerateColumns="False" DataKeyNames="Numero" DataSourceID="SqlDataSource1" OnSelectedIndexChanged="listaComprobantes_SelectedIndexChanged" AllowPaging="True" BackColor="#666666" BorderColor="White" ForeColor="White" PageSize="17">
                             <Columns>
                                 <asp:BoundField DataField="MedioPago" HeaderText="MedioPago" SortExpression="MedioPago" />
                                 <asp:BoundField DataField="Numero" HeaderText="Numero" SortExpression="Numero" InsertVisible="False" ReadOnly="True" />

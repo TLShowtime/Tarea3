@@ -7,17 +7,23 @@
     <title></title>
     <style type="text/css">
         .auto-style1 {
-            width: 138px;
+            width: 464px;
         }
         .auto-style2 {
             width: 762px;
+        }
+        .auto-style3 {
+            margin-left: 2px;
+        }
+        .auto-style4 {
+            width: 747px;
         }
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
-            <table style="width:100%;">
+        <div style="background-image: url('ruinasFondoPaginas.jpg'); background-repeat: no-repeat; background-attachment: scroll; background-position: left top; border-style: groove; text-align: center; width: auto; height: 960px; font-family: 'Gloucester MT Extra Condensed'; font-size: large; font-weight: 500; color: #FFFFFF;">
+            <table style="width:100%; font-family: 'Gloucester MT Extra Condensed'; font-size: x-large; font-weight: 500; color: #FFFFFF; text-align: center;">
                 <tr>
                     <td class="auto-style1">&nbsp;</td>
                     <td class="auto-style2" colspan="2">Seleccione los recibos que quiere pagar:<asp:Label ID="Label2" runat="server"></asp:Label>
@@ -28,7 +34,7 @@
                 <tr>
                     <td class="auto-style1">&nbsp;</td>
                     <td class="auto-style2" colspan="2">
-                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" DataSourceID="SqlDataSource1" OnSelectedIndexChanged="GridView1_SelectedIndexChanged1">
+                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" DataSourceID="SqlDataSource1" OnSelectedIndexChanged="GridView1_SelectedIndexChanged1" BackColor="#666666" BorderColor="White" CssClass="auto-style3" ForeColor="White">
                             <Columns>
                                 <asp:CommandField ShowSelectButton="True" />
                                 <asp:BoundField DataField="Id" HeaderText="Id" SortExpression="Id" InsertVisible="False" ReadOnly="True" />
@@ -45,7 +51,7 @@
                 </tr>
                 <tr>
                     <td class="auto-style1">&nbsp;</td>
-                    <td>
+                    <td class="auto-style4">
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Pagar" Width="100px" />
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

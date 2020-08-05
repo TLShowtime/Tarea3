@@ -16,8 +16,8 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
-            <table style="width:100%;">
+        <div style="font-family: 'Gloucester MT Extra Condensed'; font-size: large; font-weight: 500; color: #FFFFFF; background-image: url('ruinasFondoPaginas.jpg'); background-repeat: no-repeat; background-attachment: scroll; background-position: left top; border-style: groove; width: auto; height: 960px">
+            <table style="width:100%; text-align: center;">
                 <tr>
                     <td class="auto-style1">&nbsp;</td>
                     <td class="auto-style2">Recibos a pagar:</td>
@@ -26,7 +26,7 @@
                 <tr>
                     <td class="auto-style1">&nbsp;</td>
                     <td class="auto-style2">
-                        <asp:GridView ID="GridView1" runat="server" DataSourceID="SqlDataSource1" Width="646px" AutoGenerateColumns="False" DataKeyNames="Id">
+                        <asp:GridView ID="GridView1" runat="server" DataSourceID="SqlDataSource1" Width="646px" AutoGenerateColumns="False" DataKeyNames="Id" BackColor="#666666" BorderColor="White" ForeColor="White">
                             <Columns>
                                 <asp:BoundField DataField="Id" HeaderText="Numero" SortExpression="Id" InsertVisible="False" ReadOnly="True" />
                                 <asp:BoundField DataField="Username" HeaderText="Username" SortExpression="Username" />
@@ -48,7 +48,7 @@
                 <tr>
                     <td class="auto-style1">&nbsp;</td>
                     <td class="auto-style2">
-                        <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" DataSourceID="SqlDataSource2">
+                        <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" DataSourceID="SqlDataSource2" BackColor="#666666" BorderColor="White" ForeColor="White" Width="646px">
                             <Columns>
                                 <asp:BoundField DataField="Id" HeaderText="Numero" InsertVisible="False" ReadOnly="True" SortExpression="Id" />
                                 <asp:BoundField DataField="Username" HeaderText="Username" SortExpression="Username" />

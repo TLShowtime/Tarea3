@@ -9,7 +9,6 @@ public partial class WebUsuario : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        Label1.Text = Convert.ToString(Session["UsuarioSesion"]);
     }
 
     protected void ListView1_SelectedIndexChanged(object sender, EventArgs e)

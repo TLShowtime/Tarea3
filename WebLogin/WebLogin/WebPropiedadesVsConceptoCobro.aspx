@@ -99,7 +99,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
+        <div style="border-style: groove; font-family: 'Gloucester MT Extra Condensed'; font-size: large; font-weight: 500; color: #FFFFFF; background-image: url('ruinasFondoPaginas.jpg'); width: auto; height: 960px;">
             Propiedad vs CC:<table class="auto-style36">
                 <tr>
                     <td class="auto-style1" colspan="2">&nbsp;</td>
@@ -179,13 +179,8 @@
                     <td class="auto-style38">&nbsp;</td>
                 </tr>
                 <tr>
-                    <td class="auto-style1" colspan="2">&nbsp;</td>
-                    <td class="auto-style2">&nbsp;</td>
-                    <td class="auto-style38">&nbsp;</td>
-                </tr>
-                <tr>
                     <td class="auto-style1" colspan="2">
-                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1">
+                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" AllowPaging="True" BackColor="#666666" BorderColor="White" ForeColor="White" Width="1508px">
                             <Columns>
                                 <asp:BoundField DataField="PropiedadId" HeaderText="PropiedadId" SortExpression="PropiedadId" />
                                 <asp:BoundField DataField="ConceptoCobroId" HeaderText="ConceptoCobroId" SortExpression="ConceptoCobroId" />

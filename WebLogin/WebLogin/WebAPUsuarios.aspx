@@ -12,6 +12,7 @@
         }
         .auto-style2 {
             width: 218px;
+            height: 32px;
         }
         .auto-style3 {
             height: 23px;
@@ -19,6 +20,7 @@
         }
         .auto-style4 {
             width: 1096px;
+            height: 32px;
         }
         .auto-style5 {
             height: 23px;
@@ -35,16 +37,22 @@
         .auto-style8 {
             height: 135px;
         }
+        .auto-style9 {
+            height: 32px;
+        }
+        .auto-style10 {
+            margin-left: 195px;
+        }
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
-            <table style="width: 100%;">
+        <div style="font-family: 'Gloucester MT Extra Condensed'; font-size: large; font-weight: 300; color: #FFFFFF; text-align: center; background-image: url('ruinasFondoPaginas.jpg'); background-repeat: no-repeat; background-attachment: scroll; background-position: left top; border-style: groove; width: auto; height: 960px">
+            <table style="width: 100%; text-align: center; font-family: 'Gloucester MT Extra Condensed'; color: #FFFFFF;">
                 <tr>
-                    <td class="auto-style2">&nbsp;</td>
-                    <td class="auto-style4">&nbsp;</td>
-                    <td>&nbsp;</td>
+                    <td class="auto-style2"></td>
+                    <td class="auto-style4"></td>
+                    <td class="auto-style9"></td>
                 </tr>
                 <tr>
                     <td class="auto-style3"></td>
@@ -59,7 +67,7 @@
                 <tr>
                     <td class="auto-style6"></td>
                     <td class="auto-style7">
-                        <asp:GridView ID="listaFincas" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" Width="724px">
+                        <asp:GridView ID="listaFincas" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" Width="834px" AllowPaging="True" BackColor="#666666" BorderColor="White" CssClass="auto-style10" ForeColor="White" PageSize="17">
                             <Columns>
                                 <asp:CommandField ShowSelectButton="True" />
                                 <asp:BoundField DataField="Username" HeaderText="Username" SortExpression="Username" />

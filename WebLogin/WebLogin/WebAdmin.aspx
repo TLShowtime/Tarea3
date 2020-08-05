@@ -26,13 +26,31 @@
         .auto-style6 {
             height: 4px;
         }
+        .auto-style7 {
+            width: 100%;
+            margin-left: 563px;
+        }
+        .auto-style8 {
+            height: 100px;
+        }
+        .auto-style9 {
+            width: 461px;
+            height: 274px;
+        }
+        .auto-style10 {
+            height: 274px;
+        }
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
-        </div>
-        <table style="width:100%;">
+        <div class="auto-style8" style="background-image: url('ruinasFondoPaginas.jpg'); background-repeat: no-repeat; background-attachment: scroll; background-position: left bottom; text-align: center; width: auto; height: 960px">
+        <table style="font-family: 'Gloucester MT Extra Condensed'; font-size: large; font-weight: 500; color: #FFFFFF; text-align: center;" class="auto-style7">
+            <tr>
+                <td class="auto-style9"></td>
+                <td class="auto-style10"></td>
+                <td class="auto-style10"></td>
+            </tr>
             <tr>
                 <td class="auto-style1">ADMINISTRADOR</td>
                 <td>&nbsp;</td>
@@ -40,11 +58,6 @@
             </tr>
             <tr>
                 <td class="auto-style1">&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td class="auto-style1">Opciones:</td>
                 <td>&nbsp;</td>
                 <td>&nbsp;</td>
             </tr>
@@ -89,6 +102,7 @@
                     <asp:Button ID="Button1" runat="server" OnClick="Button1_Click1" Text="Bitácora" />
                     <br />
                     <br />
+                    PAGAR:<br />
                     <br />
                     <asp:Button ID="btnPagarAP" runat="server" OnClick="btnPagarAP_Click" Text="Pagar por AP" />
                     <br />
@@ -103,6 +117,7 @@
                 <td>&nbsp;</td>
             </tr>
         </table>
+        </div>
     </form>
 </body>
 </html>

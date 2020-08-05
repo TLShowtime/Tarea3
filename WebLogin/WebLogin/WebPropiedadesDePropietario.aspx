@@ -17,14 +17,11 @@
             height: 30px;
         }
         .auto-style4 {
-            width: 200px;
+            width: 541px;
             height: 30px;
         }
         .auto-style7 {
             margin-left: 0px;
-        }
-        .auto-style8 {
-            width: 200px;
         }
         .auto-style9 {
             width: 158px;
@@ -59,11 +56,14 @@
         .auto-style20 {
             height: 26px;
         }
+        .auto-style21 {
+            width: 541px;
+        }
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
+        <div style="font-family: 'Gloucester MT Extra Condensed'; font-size: large; font-weight: 500; color: #FFFFFF; background-image: url('ruinasFondoPaginas.jpg'); background-repeat: no-repeat; background-attachment: scroll; background-position: left top; border-style: groove; width: auto; height: 960px">
             <table style="width:100%;">
                 <tr>
                     <td class="auto-style1" colspan="4">Propiedades de un propietario:</td>
@@ -165,7 +165,7 @@
                     <td>&nbsp;</td>
                 </tr>
                 <tr>
-                    <td>&nbsp;</td>
+                    <td class="auto-style21">&nbsp;</td>
                 </tr>
                 <tr>
                     <td class="auto-style1" colspan="4">&nbsp;</td>
@@ -178,39 +178,36 @@
                     <td>&nbsp;</td>
                 </tr>
                 <tr>
-                    <td class="auto-style4">Identificación del propietario:<br />
-                        <br />
-                        Nombre de Propietario:<br />
-                        <br />
-                        Número de Finca:</td>
-                    <td class="auto-style3" colspan="3">
+                    <td class="auto-style4">Identificación del propietario:&nbsp;&nbsp;&nbsp;
                         <asp:TextBox ID="txtIDPropietario" runat="server" Width="151px"></asp:TextBox>
                         <asp:Button ID="btnBuscar" runat="server" Height="22px" OnClick="btnBuscar_Click" Text="Buscar" Width="54px" />
                         <br />
                         <br />
-                        <asp:TextBox ID="txtNombreBuscar" runat="server" Width="152px"></asp:TextBox>
+                        Nombre de Propietario:<asp:TextBox ID="txtNombreBuscar" runat="server" Width="152px"></asp:TextBox>
                         <asp:Button ID="btnBuscar3" runat="server" OnClick="btnBuscar3_Click" Text="Buscar" />
                         <br />
                         <br />
+                        Número de Finca:&nbsp;&nbsp;
                         <asp:TextBox ID="txtNumFincaBuscar" runat="server" CssClass="auto-style7" Width="153px"></asp:TextBox>
                         <asp:Button ID="btnBuscar2" runat="server" Height="23px" OnClick="btnBuscar2_Click" Text="Buscar" />
                     </td>
+                    <td class="auto-style3" colspan="3">
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                    </td>
                 </tr>
                 <tr>
-                    <td class="auto-style8">&nbsp;</td>
+                    <td class="auto-style21">&nbsp;</td>
                     <td class="auto-style9" colspan="2">&nbsp;</td>
                     <td class="auto-style17">&nbsp;</td>
                     <td class="auto-style2">&nbsp;</td>
                     <td>&nbsp;</td>
                 </tr>
                 <tr>
-                    <td class="auto-style1" colspan="4">&nbsp;</td>
-                    <td class="auto-style2">&nbsp;</td>
-                    <td>&nbsp;</td>
-                </tr>
-                <tr>
                     <td class="auto-style1" colspan="4">
-                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" Width="708px">
+                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" Width="1312px" AllowPaging="True" BackColor="#666666" BorderColor="White" ForeColor="White">
                             <Columns>
                                 <asp:BoundField DataField="Nombre" HeaderText="Nombre" SortExpression="Nombre" />
                                 <asp:BoundField DataField="Identificacion" HeaderText="Identificacion" SortExpression="Identificacion" />

@@ -19,7 +19,7 @@
             margin-left: 0px;
         }
         .auto-style12 {
-            width: 126px;
+            width: 5px;
         }
         .auto-style13 {
             width: 146px;
@@ -30,9 +30,6 @@
         .auto-style15 {
             width: 125%;
         }
-        .auto-style16 {
-            width: 154px;
-        }
         .auto-style17 {
             width: 154%;
         }
@@ -40,121 +37,131 @@
             width: 354px;
             height: 63px;
         }
+        .auto-style19 {
+            width: 80px;
+        }
     </style>
 </head>
 <body>
     <form id="form1" runat="server">
-        <div>
-            <table class="auto-style3">
+        <div style="background-position: left top; border-style: groove; font-family: 'Gloucester MT Extra Condensed'; font-size: large; font-weight: 500; color: #FFFFFF; text-align: center; background-image: url('ruinasFondoPaginas.jpg'); background-repeat: no-repeat; background-attachment: scroll; width: auto; height: 960px;">
+            <table class="auto-style3" style="text-align: left">
                 <tr>
+                    <td class="auto-style1">
+                        &nbsp;</td>
                     <td class="auto-style1">
                         <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Volver a la pantalla de Administrador" Width="239px" />
                     </td>
                     <td class="auto-style6">
-                        <table class="auto-style15">
-                            <tr>
-                                <td class="auto-style12">Número de Finca:&nbsp;&nbsp;</td>
-                                <td class="auto-style13">
-                                    <asp:TextBox ID="txtNumeroInsert" runat="server" CssClass="auto-style9"></asp:TextBox>
-                                </td>
-                                <td class="auto-style14">&nbsp;</td>
-                            </tr>
-                            <tr>
-                                <td class="auto-style12">Dirección:</td>
-                                <td class="auto-style13">
-                                    <asp:TextBox ID="txtDireccionInsert" runat="server"></asp:TextBox>
-                                </td>
-                                <td class="auto-style14">
-                                    <asp:Label ID="lblError" runat="server"></asp:Label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="auto-style12">Valor:</td>
-                                <td class="auto-style13">
-                                    <asp:TextBox ID="txtValorInsert" runat="server"></asp:TextBox>
-                                </td>
-                                <td class="auto-style14">&nbsp;</td>
-                            </tr>
-                        </table>
-                    </td>
+                        &nbsp;</td>
                 </tr>
                 <tr>
                     <td class="auto-style1">
                         &nbsp;</td>
+                    <td class="auto-style1">
+                        &nbsp;</td>
                     <td class="auto-style6">
-                        <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="Agregar Nuevo Propietario" />
 &nbsp;&nbsp;&nbsp;
                     </td>
                 </tr>
                 <tr>
-                    <td class="auto-style1" rowspan="3">
-                        <table class="auto-style17">
+                    <td class="auto-style1" rowspan="2">
+                        &nbsp;</td>
+                    <td class="auto-style1" rowspan="2">
+                        <table class="auto-style17" style="text-align: left">
                             <tr>
-                                <td class="auto-style16">Cambiar:</td>
-                                <td>&nbsp;</td>
+                                <td class="auto-style19">&nbsp;</td>
+                                <td>Cambiar:</td>
                                 <td>&nbsp;</td>
                             </tr>
                             <tr>
-                                <td class="auto-style16">Número de Finca:&nbsp;&nbsp;&nbsp;</td>
+                                <td class="auto-style19">&nbsp;</td>
                                 <td>
-                                    <asp:TextBox ID="txtNumCambiar" runat="server"></asp:TextBox>
+                                    Número de Finca:&nbsp;&nbsp;&nbsp;<asp:TextBox ID="txtNumCambiar" runat="server"></asp:TextBox>
                                 </td>
                                 <td>&nbsp;</td>
                             </tr>
                             <tr>
-                                <td class="auto-style16">Nuevo Número de Finca:</td>
+                                <td class="auto-style19">&nbsp;</td>
                                 <td>
+                                    Nuevo Número de Finca:&nbsp;
                                     <asp:TextBox ID="txtNuevoNumCambiar" runat="server"></asp:TextBox>
                                 </td>
                                 <td>&nbsp;</td>
                             </tr>
                             <tr>
-                                <td class="auto-style16">Dirección:</td>
+                                <td class="auto-style19">&nbsp;</td>
                                 <td>
+                                    Dirección:&nbsp;&nbsp;
                                     <asp:TextBox ID="txtDirCambiar" runat="server"></asp:TextBox>
                                 </td>
                                 <td>&nbsp;</td>
                             </tr>
                             <tr>
-                                <td class="auto-style16">Valor:</td>
+                                <td class="auto-style19">&nbsp;</td>
                                 <td>
+                                    Valor:&nbsp;&nbsp;
                                     <asp:TextBox ID="txtValorCambiar" runat="server"></asp:TextBox>
-                                </td>
+                                &nbsp;</td>
                                 <td>&nbsp;</td>
                             </tr>
                             <tr>
-                                <td class="auto-style16">&nbsp;</td>
+                                <td class="auto-style19">&nbsp;</td>
                                 <td>
                                     <asp:Button ID="btnCambiar" runat="server" OnClick="btnCambiar_Click" Text="Cambiar" />
                                 </td>
                                 <td>&nbsp;</td>
                             </tr>
                             <tr>
-                                <td class="auto-style16">&nbsp;</td>
+                                <td class="auto-style19">&nbsp;</td>
                                 <td>&nbsp;</td>
                                 <td>&nbsp;</td>
                             </tr>
                         </table>
                     </td>
                     <td class="auto-style18">
-&nbsp;&nbsp;
-                        Número de Finca:&nbsp;&nbsp;&nbsp;
-                        <asp:TextBox ID="txtNumeroEliminar" runat="server"></asp:TextBox>
+                        &nbsp;
+                    &nbsp;<table class="auto-style15" style="text-align: left">
+                            <tr>
+                                <td class="auto-style12">&nbsp;</td>
+                                <td class="auto-style13">
+                                    Número de Finca:&nbsp;&nbsp;<asp:TextBox ID="txtNumeroInsert" runat="server" CssClass="auto-style9"></asp:TextBox>
+                                </td>
+                                <td class="auto-style14">&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td class="auto-style12">&nbsp;</td>
+                                <td class="auto-style13">
+                                    Dirección:<asp:TextBox ID="txtDireccionInsert" runat="server"></asp:TextBox>
+                                </td>
+                                <td class="auto-style14">
+                                    <asp:Label ID="lblError" runat="server"></asp:Label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="auto-style12">&nbsp;</td>
+                                <td class="auto-style13">
+                                    Valor:<asp:TextBox ID="txtValorInsert" runat="server"></asp:TextBox>
+                                </td>
+                                <td class="auto-style14">&nbsp;</td>
+                            </tr>
+                        </table>
+                        <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="Agregar Nuevo Propietario" />
+                        <br />
+                        &nbsp; Número de Finca:&nbsp;<asp:TextBox ID="txtNumeroEliminar" runat="server"></asp:TextBox>
 &nbsp;&nbsp;&nbsp;&nbsp;
                         <asp:Button ID="Button3" runat="server" OnClick="Button3_Click" Text="Eliminar" />
-                    &nbsp;</td>
-                </tr>
-                <tr>
-                    <td class="auto-style18">
-                        &nbsp;</td>
+                    </td>
                 </tr>
                 <tr>
                     <td class="auto-style6">
                         &nbsp;</td>
                 </tr>
                 <tr>
+                    <td>
+                        &nbsp;</td>
                     <td colspan="2">
-                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1">
+                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataSourceID="SqlDataSource1" AllowPaging="True" BackColor="#666666" BorderColor="White" ForeColor="White" PageSize="12">
                             <Columns>
                                 <asp:BoundField DataField="NumeroFinca" HeaderText="NumeroFinca" SortExpression="NumeroFinca" />
                                 <asp:BoundField DataField="Direccion" HeaderText="Direccion" SortExpression="Direccion" />
