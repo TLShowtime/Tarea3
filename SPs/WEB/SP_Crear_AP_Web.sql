@@ -27,12 +27,6 @@ BEGIN
 			RETURN -1
 		END
 
-		-- Verifica si ya existe un AP existente
-		IF EXISTS (SELECT * from dbo.AP A where A.IdPropiedad = @idPropiedad)
-		BEGIN
-			RETURN -2
-		END
-
 		-- Saca la tasa de interes de la tabla de Configuraciones -- 0.10
 		SELECT @tasaInteres = CASE when TVC.NombreTipo='decimal' THEN (CONVERT(real,VC.Valor)/100) end
 		from dbo.ValoresConfiguracion VC inner join dbo.TiposValoresConfiguracion TVC on VC.IdTipo = TVC.Id
@@ -47,15 +41,14 @@ BEGIN
 					,dateadd(MONTH,1,dateadd(DAY,(C.QDiasVencen-DAY(GETDATE())),GETDATE()))
 					,(R.Monto*C.TasaIntMor/365)*abs(datediff(day, R.FechaVencimiento, GETDATE()))
 					,0,1
-			from dbo.Recibo R,dbo.ConceptoCobro C inner join dbo.CCInteresesMoratorios CIM on C.Id = CIM.Id
+			from dbo.Recibo R inner join dbo.ConceptoCobro C  on R.ConceptoCobroId = C.Id
 			where @idPropiedad = R.PropiedadId and R.Estado = 0 and R.Activo = 1
-			and GETDATE() > R.FechaVencimiento
-			and (R.Monto*C.TasaIntMor/365)*abs(datediff(day, R.FechaVencimiento, GETDATE())) > 0.0
-
+			and GETDATE() > R.FechaVencimiento and R.ConceptoCobroId != 12
+		
 			-- Suma los montos de los recibos pendientes de una propiedad
 			SELECT @montoTotal = sum(R.Monto)
 			from dbo.Recibo R
-			where R.Estado = 0 and R.Activo = 1 and R.PropiedadId = @idPropiedad ;
+			where R.Estado = 0 and R.Activo = 1 and R.PropiedadId = @idPropiedad and R.ConceptoCobroId != 12;
 
 		COMMIT
 
@@ -71,3 +64,5 @@ BEGIN
 		RETURN @@ERROR * -1
 	END CATCH
 END;
+
+

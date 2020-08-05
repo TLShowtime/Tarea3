@@ -30,11 +30,7 @@ BEGIN
 			RETURN -1
 		END
 
-		-- Verifica si ya existe un AP existente
-		IF EXISTS (SELECT * from dbo.AP A where A.IdPropiedad = @idPropiedad)
-		BEGIN
-			RETURN -2
-		END
+		SELECT @montoTotal  = CONVERT (money,@inMontoTotal)
 
 		-- Saca la tasa de interes de la tabla de Configuraciones -- 0.10
 		SELECT @tasaInteres = CASE when TVC.NombreTipo='decimal' THEN (CONVERT(real,VC.Valor)/100) end
@@ -43,7 +39,6 @@ BEGIN
 		SET @FechaActual = GETDATE()
 
 		BEGIN TRAN
-
 				-- Crea el AP
 			INSERT INTO dbo.AP(IdPropiedad,MontoOriginal,Saldo,TasaInteresAnual
 								   ,PlazoOriginal,PlazoResta
@@ -51,8 +46,10 @@ BEGIN
 								   ,InsertAt,UpdateAt,Activo)
 			VALUES  (@idPropiedad,@montoTotal,0,@tasaInteres
 					  ,@inPlazo,@inPlazo
-					  ,@montoTotal * ( (@tasaInteres*(1 + @tasaInteres)*@inPlazo)/((1+@tasaInteres)*@inPlazo - 1))
+					  ,@inMontoTotal * ( (@tasaInteres*(1 + @tasaInteres)*@inPlazo)/((1+@tasaInteres)*@inPlazo - 1))
 					  ,GETDATE(),GETDATE(),1)
+
+
 
 				-- Guarda la direccion del AP para meter el Comprobante luego
 			SELECT @idAP = max(A.Id)
@@ -69,7 +66,7 @@ BEGIN
 				-- Enlazar el Comprobante con el AP
 			UPDATE dbo.AP
 			set [AP].IdComprobante = @idComprobante
-			where [AP].IdPropiedad = @idPropiedad
+			where [AP].IdPropiedad = @idPropiedad and [AP].Id =  @idAP
 
 				-- Enlazar el Comprobante con los recibos y cambiar estado, incluyendo Intereses Moratorios
 			UPDATE dbo.Recibo
@@ -96,7 +93,7 @@ BEGIN
 	BEGIN CATCH
 		IF @@TRANCOUNT >0
 			ROLLBACK TRAN
-		PRINT('Hubo un error, logro terminar la Confirmacion de AP');
+		PRINT('Hubo un error, no logro terminar la Confirmacion de AP');
 		RETURN @@ERROR * -1
 	END CATCH
 END;

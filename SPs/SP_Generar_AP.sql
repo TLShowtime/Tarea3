@@ -62,7 +62,7 @@ BEGIN
 						,dateadd(MONTH,1,dateadd(DAY,(C.QDiasVencen-DAY(@inFechaActual)),@inFechaActual))
 						,(R.Monto*C.TasaIntMor/365)*abs(datediff(day, R.FechaVencimiento, @inFechaActual))
 						,0,1
-				from dbo.Recibo R,dbo.ConceptoCobro C inner join dbo.CCInteresesMoratorios CIM on C.Id = CIM.Id, @idPropiedades P
+				from dbo.Recibo R inner join dbo.ConceptoCobro C  on R.ConceptoCobroId = C.Id, @idPropiedades P
 				where P.IdPropiedad = R.PropiedadId and R.Estado = 0 and R.Activo = 1
 				and @inFechaActual > R.FechaVencimiento and P.Id = @minCount
 				and (R.Monto*C.TasaIntMor/365)*abs(datediff(day, R.FechaVencimiento, @inFechaActual)) > 0.0

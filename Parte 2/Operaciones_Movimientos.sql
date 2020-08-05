@@ -365,9 +365,9 @@ BEGIN
 		where P.id = @lowPago and Pr.NumeroFinca = P.NumFinca and R.ConceptoCobroId = P.TipoRecibo
 			  and R.FechaEmision <= @FechaActual and R.Estado = 0 AND R.ConceptoCobroId = C.Id
 
+
 		IF EXISTS (SELECT * from @RecibosAPagar)
 		BEGIN
-			
 
 			Select @sumaTotal = sum(R.Monto + RP.montoInteresesMoratorios)
 			from @RecibosAPagar RP
@@ -408,7 +408,8 @@ BEGIN
 					dateadd(MONTH,1,dateadd(DAY,(C.QDiasVencen-DAY(@FechaActual)),@FechaActual)),
 					RP.montoInteresesMoratorios,1,1
 			from @RecibosAPagar RP, dbo.Recibo R,dbo.ConceptoCobro C inner join dbo.CCInteresesMoratorios CIM on C.Id = CIM.Id
-			where RP.idRecibo = R.Id and RP.montoInteresesMoratorios > 0
+			where RP.idRecibo = R.Id and RP.montoInteresesMoratorios > CONVERT(money,0)
+			and  R.FechaVencimiento> @FechaActual
 
 		END
 		SET @lowPago = @lowPago + 1
@@ -450,7 +451,7 @@ BEGIN
 
 		Insert into @RecibosAPagarReconexion(idRecibo,montoInteresesMoratorios)
 		SELECT R.Id,case
-		when @FechaActual<=R.FechaVencimiento then 0 -- no tiene que generarse recibo de int moratorios
+		when @FechaActual<=R.FechaVencimiento then 0.0 -- no tiene que generarse recibo de int moratorios
 		else (R.Monto*C.TasaIntMor/365)*abs(datediff(day, R.FechaVencimiento, @FechaActual))
 			-- SI tiene que generarse recibo
 		end
@@ -459,7 +460,6 @@ BEGIN
 		inner join dbo.Propiedad Pr on R.PropiedadId = Pr.Id,
 		@Pagos P,
 		dbo.ConceptoCobro C
-
 		where P.id = @lowPago and Pr.NumeroFinca = P.NumFinca and R.ConceptoCobroId = P.TipoRecibo
 			  and R.FechaEmision <= @FechaActual and R.Estado = 0 AND R.ConceptoCobroId = C.Id
 
@@ -493,7 +493,8 @@ BEGIN
 					dateadd(MONTH,1,dateadd(DAY,(C.QDiasVencen-DAY(@FechaActual)),@FechaActual)),
 					RP.montoInteresesMoratorios,1,1
 			from @RecibosAPagar RP, dbo.Recibo R,dbo.ConceptoCobro C inner join dbo.CCInteresesMoratorios CIM on C.Id = CIM.Id
-			where RP.idRecibo = R.Id and RP.montoInteresesMoratorios > 0
+			where RP.idRecibo = R.Id and RP.montoInteresesMoratorios > CONVERT(money,0)
+			and  R.FechaVencimiento> @FechaActual
 
 			
 		END
@@ -540,3 +541,7 @@ END;
 EXEC sp_xml_removedocument @hdoc;
 
 SELECT * FROM dbo.ComprobantePago C where C.MedioPago LIKE 'AP#%'
+
+
+SELECT P.NumeroFinca ,R.* from dbo.Recibo R,dbo.Propiedad P  where R.Monto = 0.0 and P.Id = R.PropiedadId
+		
